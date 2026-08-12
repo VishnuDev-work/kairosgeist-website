@@ -211,6 +211,17 @@
     <circle cx="100" cy="100" r="22" stroke-width="6"/>
   </svg>
 </div>
+<script>
+  (function () {
+    var splash = document.getElementById('splash');
+    if (!splash) return;
+    if (sessionStorage.getItem('kg_visited')) {
+      splash.style.display = 'none';
+    } else {
+      sessionStorage.setItem('kg_visited', '1');
+    }
+  })();
+</script>
 
 <nav class="site-nav wrap" aria-label="Main navigation">
   <a href="/en/" class="brand">
@@ -278,11 +289,11 @@
 <script>
   window.addEventListener('load', () => {
     const splash = document.getElementById('splash');
-    if (!splash) return;
+    if (!splash || splash.style.display === 'none') return;
     setTimeout(() => {
       splash.classList.add('hide');
       setTimeout(() => splash.remove(), 300);
-    }, 250);
+    }, 4000);
   });
 </script>
 </body>
