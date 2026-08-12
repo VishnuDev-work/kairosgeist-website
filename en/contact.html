@@ -120,6 +120,20 @@
   .splash svg { width: 56px; height: 56px; color: var(--kg); animation: spin 0.9s linear infinite; }
   .splash.hide { opacity: 0; pointer-events: none; }
   @keyframes spin { to { transform: rotate(360deg); } }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    .site-nav .brand { order: 1; }
+    .site-nav .lang-links { order: 2; }
+    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
+    header.hero { padding: 36px 0 44px; }
+    .wordmark { font-size: 30px; }
+    .tagline { font-size: 17px; }
+    .page-header h1 { font-size: 24px; }
+    .motto { font-size: 21px; padding: 16px 0; }
+    .founding-box .count { font-size: 24px; }
+    form.inquiry button { align-self: stretch; justify-content: center; }
+  }
 </style>
 </head>
 <body>
