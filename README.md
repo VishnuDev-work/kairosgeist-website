@@ -2,8 +2,8 @@
 
 Static site for kairosgeist.de. No build step, no backend — plain HTML/CSS.
 
-- `index.html` — English (served at the domain root)
-- `de/index.html` — German (served at `/de/`)
+- `index.html` — German, the default (served at the domain root)
+- `en/index.html` — English (served at `/en/`)
 
 ## Structure
 
@@ -13,14 +13,14 @@ loaded from Google Fonts; the contact form submits via Formspree.
 
 ## Local preview
 
-Just open `index.html` (or `de/index.html`) directly in a browser — no server
+Just open `index.html` (or `en/index.html`) directly in a browser — no server
 required.
 
 ## Deploying
 
 1. **Formspree**: sign up at [formspree.io](https://formspree.io), create a
    form, and set its endpoint in the `action` attribute of the `<form>` in
-   both `index.html` and `de/index.html`.
+   both `index.html` and `en/index.html`.
 2. **GitHub Pages**:
    - Push this repo to GitHub
    - In Settings → Pages, set the source branch (usually `main`) and save
