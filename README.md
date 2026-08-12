@@ -2,25 +2,32 @@
 
 Static site for kairosgeist.de. No build step, no backend — plain HTML/CSS.
 
-- `index.html` — German, the default (served at the domain root)
-- `en/index.html` — English (served at `/en/`)
+German is the default language (served at the domain root); English lives
+under `/en/`. Each language has four pages:
+
+- `index.html` / `en/index.html` — Home
+- `product.html` / `en/product.html` — Product
+- `roadmap.html` / `en/roadmap.html` — Roadmap
+- `contact.html` / `en/contact.html` — Contact
 
 ## Structure
 
-Each page is self-contained (inline CSS, no JS framework). The two language
-versions link to each other via a switcher in the top-right corner. Fonts are
-loaded from Google Fonts; the contact form submits via Formspree.
+Each page is self-contained (inline CSS, no JS framework). A top nav bar
+(logo + page links + language switcher) is repeated on every page. Fonts are
+loaded from Google Fonts; the contact form submits to Formspree via `fetch`
+(so the page doesn't navigate away — it shows an inline success/error message
+and resets the form instead). Every page also shows a brief splash screen
+(rotating logo) while it loads.
 
 ## Local preview
 
-Just open `index.html` (or `en/index.html`) directly in a browser — no server
-required.
+Just open any `.html` file directly in a browser — no server required.
 
 ## Deploying
 
 1. **Formspree**: sign up at [formspree.io](https://formspree.io), create a
    form, and set its endpoint in the `action` attribute of the `<form>` in
-   both `index.html` and `en/index.html`.
+   both `contact.html` and `en/contact.html`.
 2. **GitHub Pages**:
    - Push this repo to GitHub
    - In Settings → Pages, set the source branch (usually `main`) and save

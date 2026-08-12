@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KairosGeist — Workforce Planning Engine for Independent Hotels</title>
+<title>Product — KairosGeist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -50,46 +50,6 @@
   .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
   .site-nav .lang-links a:hover { color: var(--kg); }
 
-  header.hero {
-    padding: 50px 0 60px;
-    text-align: center;
-  }
-  .logo-icon { color: var(--kg); }
-  .wordmark {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    letter-spacing: -0.02em;
-    margin: 18px 0 8px;
-  }
-  .wordmark .a { color: var(--ink); }
-  .wordmark .b { color: var(--kg); }
-  .tagline {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-size: 20px;
-    color: var(--muted);
-  }
-  .tagline em { color: var(--kg); font-style: italic; }
-  .subtagline {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 12px;
-    color: #999;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 10px;
-  }
-  .stage-badge {
-    display: inline-block;
-    border: 1px solid var(--ink);
-    padding: 4px 12px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 24px;
-  }
-
   section { padding: 40px 0; border-top: 1px solid var(--border); }
   h2 {
     font-family: 'Inter Tight', sans-serif;
@@ -110,79 +70,16 @@
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .page-header p { color: var(--muted); margin: 0; }
 
-  .motto {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-size: 28px;
-    text-align: center;
-    padding: 22px 0;
-    border-top: 1px solid var(--kg);
-    border-bottom: 1px solid var(--kg);
-    margin: 10px 0 30px;
-  }
-  .motto .decide { color: var(--kg); }
-
   .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
   .feature-card:last-child { border-bottom: none; }
   .feature-icon { flex: 0 0 auto; color: var(--kg); margin-top: 2px; }
   .feature-text p { margin: 0; font-size: 14px; color: var(--muted); }
-
-  .roadmap-flag {
-    display: inline-block;
-    background: #fff3cd;
-    border: 1px solid #d4a017;
-    color: #6b5200;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    margin-bottom: 10px;
-  }
-
-  .founding-box {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--kg);
-    padding: 20px 22px;
-  }
-  .founding-box .count {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 700;
-    font-size: 28px;
-    color: var(--kg);
-  }
 
   .pain-box {
     background: #f0fbfa;
     border: 1px solid var(--kg);
     padding: 20px 22px;
   }
-
-  form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-  form.inquiry input, form.inquiry select, form.inquiry textarea {
-    font-family: Georgia, serif;
-    font-size: 14px;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    background: #fff;
-  }
-  form.inquiry textarea { min-height: 100px; resize: vertical; }
-  form.inquiry label { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: -6px; }
-  form.inquiry button {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    background: var(--kg);
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    align-self: flex-start;
-  }
-  form.inquiry button:hover { opacity: 0.9; }
 
   footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
   footer a { color: var(--kg); text-decoration: none; }
@@ -230,43 +127,60 @@
     <span class="brand-word"><span class="a">Kairos</span><span class="b">Geist</span></span>
   </a>
   <div class="nav-links">
-    <a href="/en/" class="active" aria-current="page">Home</a>
-    <a href="/en/product.html">Product</a>
+    <a href="/en/">Home</a>
+    <a href="/en/product.html" class="active" aria-current="page">Product</a>
     <a href="/en/roadmap.html">Roadmap</a>
     <a href="/en/contact.html">Contact</a>
   </div>
   <div class="lang-links" aria-label="Language switcher">
-    <a href="/en/" class="active" aria-current="page">EN</a> / <a href="/">DE</a>
+    <a href="/en/product.html" class="active" aria-current="page">EN</a> / <a href="/product.html">DE</a>
   </div>
 </nav>
 
-<header class="hero wrap">
-  <svg class="logo-icon" viewBox="0 0 200 200" width="90" height="90">
-    <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-    <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-    <circle cx="100" cy="32" r="8" fill="currentColor"/>
-    <circle cx="100" cy="168" r="8" fill="currentColor"/>
-    <circle cx="32" cy="100" r="8" fill="currentColor"/>
-    <circle cx="168" cy="100" r="8" fill="currentColor"/>
-    <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="22" cy="100" r="6" fill="currentColor"/>
-    <circle cx="178" cy="100" r="6" fill="currentColor"/>
-    <circle cx="100" cy="100" r="24" fill="none" stroke="currentColor" stroke-width="4"/>
-    <circle cx="100" cy="100" r="14" fill="currentColor"/>
-  </svg>
-  <div class="wordmark"><span class="a">Kairos</span><span class="b">Geist</span></div>
-  <div class="tagline">Intelligence of your <em>Workforce.</em></div>
-  <div class="subtagline">Workforce Planning Engine for Independent Hotels &middot; DACH</div>
-  <div class="stage-badge">Pre-Seed &middot; Applying for the EXIST Grant</div>
+<header class="page-header wrap">
+  <h1>Product</h1>
+  <p>What's actually built and working today.</p>
 </header>
 
+<section class="wrap" style="border-top:none; padding-top:10px;">
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><rect x="6" y="10" width="16" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="3"/><rect x="16" y="16" width="16" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="10" width="16" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+    <div class="feature-text">
+      <h3>Three compliant plan options, every week</h3>
+      <p>Generated automatically. You choose the plan that fits your week — never a single take-it-or-leave-it schedule.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 24 L24 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 24 L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+    <div class="feature-text">
+      <h3>Automatic hours-balance (Zeitkonto) tracking</h3>
+      <p>No more manual tallying of who's owed time or who's over — updated automatically as plans are approved.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><rect x="12" y="18" width="24" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M17 18 V12 A7 7 0 0 1 31 12 V18" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="27" r="2.5" fill="currentColor"/></svg>
+    <div class="feature-text">
+      <h3>Silent dry-run check on every manual swap</h3>
+      <p>Hard blocks on legal limits (11-hour rest, 6-day maximum). Soft flags on preference conflicts. It becomes impossible to accidentally schedule an illegal shift, without taking the decision away from you.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M24 4 L42 11 V23 C42 34 34 42 24 44 C14 42 6 34 6 23 V11 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M16 24 L21 30 L33 17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="feature-text">
+      <h3>Audit-ready compliance reports, on demand</h3>
+      <p>Printable per worker, per period — planned vs. actual hours, delta, sign-off. The document you'd hand a labor inspector.</p>
+    </div>
+  </div>
+</section>
+
 <section class="wrap">
-  <h2>Who we are</h2>
-  <p>KairosGeist is a compliance-first workforce planning engine for independent hotels, focused on German labor law (ArbZG) and the weekly scheduling headaches that come with it. We're pre-seed, and we're building this directly with independent hotels — not guessing at what you need from the outside.</p>
-
-  <div class="motto">System proposes. <span class="decide">Human decides.</span></div>
-
-  <p>The system never makes the call on its own — it makes sure the option in front of you is already compliant, and protects you from the mistakes that lead to labor-office fines. It also learns from your own supervisor's real decisions over time, getting more tailored to how your property actually runs the longer you use it.</p>
+  <h2>Have a specific pain point?</h2>
+  <div class="pain-box">
+    <p style="margin-bottom:0;">We're building this with hotels, not just for them. Your specific operational needs help shape what we build next — tell us what's actually costing you time, and we'll factor it directly into the roadmap.</p>
+  </div>
 </section>
 
 <footer class="wrap">

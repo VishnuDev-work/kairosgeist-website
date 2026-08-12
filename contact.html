@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>KairosGeist — Workforce Planning Engine for Independent Hotels</title>
+<title>Kontakt — KairosGeist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -50,46 +50,6 @@
   .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
   .site-nav .lang-links a:hover { color: var(--kg); }
 
-  header.hero {
-    padding: 50px 0 60px;
-    text-align: center;
-  }
-  .logo-icon { color: var(--kg); }
-  .wordmark {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 700;
-    font-size: 40px;
-    letter-spacing: -0.02em;
-    margin: 18px 0 8px;
-  }
-  .wordmark .a { color: var(--ink); }
-  .wordmark .b { color: var(--kg); }
-  .tagline {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-size: 20px;
-    color: var(--muted);
-  }
-  .tagline em { color: var(--kg); font-style: italic; }
-  .subtagline {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 12px;
-    color: #999;
-    letter-spacing: 2px;
-    text-transform: uppercase;
-    margin-top: 10px;
-  }
-  .stage-badge {
-    display: inline-block;
-    border: 1px solid var(--ink);
-    padding: 4px 12px;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-top: 24px;
-  }
-
   section { padding: 40px 0; border-top: 1px solid var(--border); }
   h2 {
     font-family: 'Inter Tight', sans-serif;
@@ -99,65 +59,11 @@
     color: var(--muted);
     margin-bottom: 16px;
   }
-  h3 {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 16px;
-    margin: 0 0 6px;
-  }
   p { margin: 0 0 14px; }
 
   .page-header { padding: 50px 0 10px; border-top: none; }
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .page-header p { color: var(--muted); margin: 0; }
-
-  .motto {
-    font-family: 'Instrument Serif', Georgia, serif;
-    font-style: italic;
-    font-size: 28px;
-    text-align: center;
-    padding: 22px 0;
-    border-top: 1px solid var(--kg);
-    border-bottom: 1px solid var(--kg);
-    margin: 10px 0 30px;
-  }
-  .motto .decide { color: var(--kg); }
-
-  .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
-  .feature-card:last-child { border-bottom: none; }
-  .feature-icon { flex: 0 0 auto; color: var(--kg); margin-top: 2px; }
-  .feature-text p { margin: 0; font-size: 14px; color: var(--muted); }
-
-  .roadmap-flag {
-    display: inline-block;
-    background: #fff3cd;
-    border: 1px solid #d4a017;
-    color: #6b5200;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    margin-bottom: 10px;
-  }
-
-  .founding-box {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--kg);
-    padding: 20px 22px;
-  }
-  .founding-box .count {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 700;
-    font-size: 28px;
-    color: var(--kg);
-  }
-
-  .pain-box {
-    background: #f0fbfa;
-    border: 1px solid var(--kg);
-    padding: 20px 22px;
-  }
 
   form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
   form.inquiry input, form.inquiry select, form.inquiry textarea {
@@ -182,7 +88,22 @@
     cursor: pointer;
     align-self: flex-start;
   }
+  form.inquiry button { display: inline-flex; align-items: center; gap: 8px; }
   form.inquiry button:hover { opacity: 0.9; }
+  form.inquiry button:disabled { opacity: 0.7; cursor: default; }
+  .btn-spinner { display: none; width: 15px; height: 15px; animation: spin 0.9s linear infinite; }
+  form.inquiry button:disabled .btn-spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .form-status {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    padding: 12px 14px;
+    border-radius: 3px;
+    display: none;
+  }
+  .form-status.success { display: block; background: #f0fbfa; border: 1px solid var(--kg); color: #0d6b60; }
+  .form-status.error { display: block; background: #fdf0f0; border: 1px solid #d47a7a; color: #7a1f1f; }
 
   footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
   footer a { color: var(--kg); text-decoration: none; }
@@ -212,8 +133,8 @@
   </svg>
 </div>
 
-<nav class="site-nav wrap" aria-label="Main navigation">
-  <a href="/en/" class="brand">
+<nav class="site-nav wrap" aria-label="Hauptnavigation">
+  <a href="/" class="brand">
     <svg width="26" height="26" viewBox="0 0 200 200">
       <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
       <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
@@ -230,50 +151,88 @@
     <span class="brand-word"><span class="a">Kairos</span><span class="b">Geist</span></span>
   </a>
   <div class="nav-links">
-    <a href="/en/" class="active" aria-current="page">Home</a>
-    <a href="/en/product.html">Product</a>
-    <a href="/en/roadmap.html">Roadmap</a>
-    <a href="/en/contact.html">Contact</a>
+    <a href="/">Start</a>
+    <a href="/product.html">Produkt</a>
+    <a href="/roadmap.html">Roadmap</a>
+    <a href="/contact.html" class="active" aria-current="page">Kontakt</a>
   </div>
-  <div class="lang-links" aria-label="Language switcher">
-    <a href="/en/" class="active" aria-current="page">EN</a> / <a href="/">DE</a>
+  <div class="lang-links" aria-label="Sprachauswahl">
+    <a href="/en/contact.html">EN</a> / <a href="/contact.html" class="active" aria-current="page">DE</a>
   </div>
 </nav>
 
-<header class="hero wrap">
-  <svg class="logo-icon" viewBox="0 0 200 200" width="90" height="90">
-    <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-    <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-    <circle cx="100" cy="32" r="8" fill="currentColor"/>
-    <circle cx="100" cy="168" r="8" fill="currentColor"/>
-    <circle cx="32" cy="100" r="8" fill="currentColor"/>
-    <circle cx="168" cy="100" r="8" fill="currentColor"/>
-    <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-    <circle cx="22" cy="100" r="6" fill="currentColor"/>
-    <circle cx="178" cy="100" r="6" fill="currentColor"/>
-    <circle cx="100" cy="100" r="24" fill="none" stroke="currentColor" stroke-width="4"/>
-    <circle cx="100" cy="100" r="14" fill="currentColor"/>
-  </svg>
-  <div class="wordmark"><span class="a">Kairos</span><span class="b">Geist</span></div>
-  <div class="tagline">Intelligence of your <em>Workforce.</em></div>
-  <div class="subtagline">Workforce Planning Engine for Independent Hotels &middot; DACH</div>
-  <div class="stage-badge">Pre-Seed &middot; Applying for the EXIST Grant</div>
+<header class="page-header wrap">
+  <h1>Kontakt aufnehmen</h1>
+  <p>Keine Demo, kein Pitch — nur ein kurzes Gespräch über Ihre Herausforderungen bei Planung und Compliance.</p>
 </header>
 
-<section class="wrap">
-  <h2>Who we are</h2>
-  <p>KairosGeist is a compliance-first workforce planning engine for independent hotels, focused on German labor law (ArbZG) and the weekly scheduling headaches that come with it. We're pre-seed, and we're building this directly with independent hotels — not guessing at what you need from the outside.</p>
+<section class="wrap" style="border-top:none; padding-top:10px;">
+  <p>Senden Sie uns eine Nachricht, oder schreiben Sie uns direkt.</p>
 
-  <div class="motto">System proposes. <span class="decide">Human decides.</span></div>
+  <form class="inquiry" id="inquiry-form" action="https://formspree.io/f/mqpzbzov" method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required />
 
-  <p>The system never makes the call on its own — it makes sure the option in front of you is already compliant, and protects you from the mistakes that lead to labor-office fines. It also learns from your own supervisor's real decisions over time, getting more tailored to how your property actually runs the longer you use it.</p>
+    <label for="property">Name der Unterkunft</label>
+    <input type="text" id="property" name="property" />
+
+    <label for="email">E-Mail</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="message">Was wäre für uns nützlich zu wissen? (optional)</label>
+    <textarea id="message" name="message"></textarea>
+
+    <button type="submit">
+      <svg class="btn-spinner" viewBox="0 0 200 200" fill="none" stroke="currentColor">
+        <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" stroke-width="14" stroke-linecap="round"/>
+      </svg>
+      <span>Senden</span>
+    </button>
+    <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+  </form>
 </section>
 
 <footer class="wrap">
-  <p><strong>Vishnu Devadas</strong> &middot; Founder<br/>
+  <p><strong>Vishnu Devadas</strong> &middot; Gründer<br/>
   <a href="mailto:founder@kairosgeist.de">founder@kairosgeist.de</a><br/>
-  <span style="font-size:12px; color:#999;">or reach the team directly at</span> <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
+  <span style="font-size:12px; color:#999;">oder erreichen Sie das Team direkt unter</span> <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
 </footer>
+
+<script>
+  const form = document.getElementById('inquiry-form');
+  const status = document.getElementById('form-status');
+  const button = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    button.disabled = true;
+    status.className = 'form-status';
+    status.textContent = '';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (response.ok) {
+        form.reset();
+        status.className = 'form-status success';
+        status.textContent = 'Danke! Ihre Nachricht wurde gesendet.';
+      } else {
+        status.className = 'form-status error';
+        status.textContent = 'Da ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
+      }
+    } catch (err) {
+      status.className = 'form-status error';
+      status.textContent = 'Da ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
 
 <script>
   window.addEventListener('load', () => {
