@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="google" content="notranslate" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Roadmap — KairosGeist</title>
+<title>Team — KairosGeist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -52,55 +52,30 @@
   .site-nav .lang-links a:hover { color: var(--kg); }
 
   section { padding: 40px 0; border-top: 1px solid var(--border); }
-  h2 {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 16px;
-  }
-  h3 {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 16px;
-    margin: 0 0 6px;
-  }
   p { margin: 0 0 14px; }
 
   .page-header { padding: 50px 0 10px; border-top: none; }
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .page-header p { color: var(--muted); margin: 0; }
 
-  .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
-  .feature-card:last-child { border-bottom: none; }
-  .feature-icon { flex: 0 0 auto; color: var(--kg); margin-top: 2px; }
-  .feature-text p { margin: 0; font-size: 14px; color: var(--muted); }
-
-  .roadmap-flag {
-    display: inline-block;
-    background: #fff3cd;
-    border: 1px solid #d4a017;
-    color: #6b5200;
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 10px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    padding: 2px 8px;
-    margin-bottom: 10px;
+  .team-grid {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+    border-top: none;
+    padding-top: 10px;
   }
-
-  .founding-box {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-left: 4px solid var(--kg);
-    padding: 20px 22px;
+  .team-card { flex: 1; min-width: 220px; text-align: center; }
+  .team-card img {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--kg);
+    margin-bottom: 14px;
   }
-  .founding-box .count {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 700;
-    font-size: 28px;
-    color: var(--kg);
-  }
+  .team-card h3 { font-family: 'Inter Tight', sans-serif; font-size: 18px; margin: 0 0 2px; }
+  .team-card .role { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--kg); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
+  .team-card p.bio { font-size: 14px; color: var(--muted); text-align: left; }
 
   footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
   footer a { color: var(--kg); text-decoration: none; }
@@ -110,13 +85,9 @@
     .site-nav .brand { order: 1; }
     .site-nav .lang-links { order: 2; }
     .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
-    header.hero { padding: 36px 0 44px; }
-    .wordmark { font-size: 30px; }
-    .tagline { font-size: 17px; }
     .page-header h1 { font-size: 24px; }
-    .motto { font-size: 21px; padding: 16px 0; }
-    .founding-box .count { font-size: 24px; }
-    form.inquiry button { align-self: stretch; justify-content: center; }
+    .team-grid { flex-direction: column; align-items: center; }
+    .team-card p.bio { text-align: center; }
   }
 </style>
 </head>
@@ -142,48 +113,33 @@
   <div class="nav-links">
     <a href="/en/">Home</a>
     <a href="/en/product.html">Product</a>
-    <a href="/en/roadmap.html" class="active" aria-current="page">Roadmap</a>
-    <a href="/en/team.html">Team</a>
+    <a href="/en/roadmap.html">Roadmap</a>
+    <a href="/en/team.html" class="active" aria-current="page">Team</a>
     <a href="/en/contact.html">Contact</a>
   </div>
   <div class="lang-links" aria-label="Language switcher">
-    <a href="/roadmap.html">DE</a> / <a href="/en/roadmap.html" class="active" aria-current="page">EN</a>
+    <a href="/team.html">DE</a> / <a href="/en/team.html" class="active" aria-current="page">EN</a>
   </div>
 </nav>
 
 <header class="page-header wrap">
-  <h1>Roadmap</h1>
-  <p>What we're building next, and how the founding partner program works.</p>
+  <h1>Team</h1>
+  <p>Two people, building this directly with independent hotels.</p>
 </header>
 
-<section class="wrap" style="border-top:none; padding-top:10px;">
-  <h2><span class="roadmap-flag">Roadmap — not yet available</span></h2>
-  <div class="feature-card">
-    <div class="feature-text">
-      <h3>Daily housekeeping &amp; maintenance routing</h3>
-      <p>Reading your building's floor plan and live occupancy to auto-route housekeeping and maintenance, minimizing travel and prioritizing VIP rooms. Still in design — shaped by the hotels we partner with early, not guessed at from outside.</p>
-    </div>
+<section class="wrap team-grid">
+  <div class="team-card">
+    <img src="data:image/jpeg;base64,REDACTED-IMAGE-DATA" alt="Vishnu Devadas" />
+    <h3>Vishnu Devadas</h3>
+    <div class="role">Founder &amp; CEO</div>
+    <p class="bio">Builds the product end to end &mdash; engine, compliance rules, and the workforce planning logic. Currently completing a Master's in Data and Knowledge Engineering at Otto-von-Guericke University Magdeburg.</p>
   </div>
-  <div class="feature-card">
-    <div class="feature-text">
-      <h3>Direct PMS &amp; payroll integration</h3>
-      <p>Automatic data pull from your property management system, and DATEV-compatible payroll export. Today, this data is entered manually while these integrations are being built.</p>
-    </div>
+  <div class="team-card">
+    <img src="data:image/jpeg;base64,REDACTED-IMAGE-DATA" alt="Vincy Cherian" />
+    <h3>Vincy Cherian</h3>
+    <div class="role">COO</div>
+    <p class="bio">Leads hotel outreach and operations, grounding the product in what independent hotels actually need on the floor, not just what looks good on a roadmap.</p>
   </div>
-</section>
-
-<section class="wrap">
-  <h2>Founding partner program</h2>
-  <div class="founding-box">
-    <div class="count">7 spots</div>
-    <p style="margin-top:10px;">We're opening a founding partner track, limited to seven independent hotels, with real and meaningful terms for those who choose to join early — the earlier you're in, the stronger the terms, and they stay in place for as long as you're a customer, not a temporary pilot rate.</p>
-    <p style="margin-bottom:0;">There's no obligation in getting in touch. The benefits only apply if and when you choose to become a founding partner — we're happy to walk through exactly what that looks like when we talk.</p>
-  </div>
-</section>
-
-<section class="wrap">
-  <h2>Something specific in mind?</h2>
-  <p style="margin-bottom:0;">Beyond what's listed here, we have other features in active development that aren't public yet. Before assuming something isn't on our list — <a href="/en/contact.html" style="color:var(--kg);">just ask us</a>. There's a good chance we're already working on it.</p>
 </section>
 
 <footer class="wrap">

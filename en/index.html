@@ -160,6 +160,34 @@
     padding: 20px 22px;
   }
 
+  .pain-list { margin: 18px 0 6px; }
+  .pain-item {
+    display: flex;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .pain-item:last-child { border-bottom: none; }
+  .pain-item .dot {
+    flex: 0 0 auto;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--kg);
+    margin-top: 8px;
+  }
+  .pain-item p { margin: 0; font-size: 14px; color: var(--muted); }
+  .pain-item strong { color: var(--ink); }
+
+  .built-teaser {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--kg);
+    padding: 16px 20px;
+    margin-top: 20px;
+    font-size: 14px;
+  }
+  .built-teaser a { color: var(--kg); font-weight: 600; text-decoration: none; }
+
   form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
   form.inquiry input, form.inquiry select, form.inquiry textarea {
     font-family: Georgia, serif;
@@ -226,6 +254,7 @@
     <a href="/en/" class="active" aria-current="page">Home</a>
     <a href="/en/product.html">Product</a>
     <a href="/en/roadmap.html">Roadmap</a>
+    <a href="/en/team.html">Team</a>
     <a href="/en/contact.html">Contact</a>
   </div>
   <div class="lang-links" aria-label="Language switcher">
@@ -257,9 +286,18 @@
   <h2>Who we are</h2>
   <p>KairosGeist is a compliance-first workforce planning engine for independent hotels, focused on German labor law (ArbZG) and the weekly scheduling headaches that come with it. We're pre-seed, and we're building this directly with independent hotels — not guessing at what you need from the outside.</p>
 
+  <div class="pain-list">
+    <div class="pain-item"><span class="dot"></span><p><strong>Fairness disputes erode morale.</strong> "Why does Maria always get Fridays off?" Without a record across weeks, there's no way to prove fairness — and staff feel the inequity even when it isn't there.</p></div>
+    <div class="pain-item"><span class="dot"></span><p><strong>Day-off requests get lost.</strong> A note on WhatsApp, a verbal ask in passing — some get remembered, some don't, and the ones that don't become the next fairness complaint.</p></div>
+    <div class="pain-item"><span class="dot"></span><p><strong>No clean paper trail.</strong> When a dispute comes up, or a labor inspector asks, reconstructing who requested what — and why a shift was assigned the way it was — eats an afternoon nobody has.</p></div>
+    <div class="pain-item"><span class="dot"></span><p><strong>Institutional knowledge walks out the door.</strong> When your best supervisor leaves or moves properties, the judgment they built up — who works well together, which patterns keep the team happy — leaves with them. The next person starts from zero.</p></div>
+  </div>
+
   <div class="motto">System proposes. <span class="decide">Human decides.</span></div>
 
-  <p>The system never makes the call on its own — it makes sure the option in front of you is already compliant, and protects you from the mistakes that lead to labor-office fines. It also learns from your own supervisor's real decisions over time, getting more tailored to how your property actually runs the longer you use it.</p>
+  <p>The system never makes the call on its own — it makes sure the option in front of you is already compliant, and protects you from the mistakes that lead to labor-office fines. It also learns from your own supervisor's real decisions over time, so that judgment stays with the property, not just with whoever happens to be scheduling.</p>
+
+  <div class="built-teaser">Fairness tracking, day-off request handling, and audit-ready documentation are already built. See what's live today on the <a href="/en/product.html">Product page</a>.</div>
 </section>
 
 <footer class="wrap">
