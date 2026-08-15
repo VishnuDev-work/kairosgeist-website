@@ -265,6 +265,15 @@
 
 <script>
   (function () {
+    function sizeMockups() {
+      document.querySelectorAll('.laptop-mockup').forEach(function (el) {
+        var w = el.getBoundingClientRect().width;
+        if (w > 0) el.style.height = (w * 4093 / 7013) + 'px';
+      });
+    }
+    sizeMockups();
+    window.addEventListener('resize', sizeMockups);
+
     var slides = document.querySelectorAll('.laptop-mockup .slide');
     if (slides.length < 2) return;
     var i = 0;
