@@ -25,6 +25,7 @@
     color: var(--ink);
     font-family: Georgia, serif;
     line-height: 1.6;
+    padding-bottom: 52px;
   }
   .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
 
@@ -77,7 +78,21 @@
   .team-card .role { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--kg); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
   .team-card p.bio { font-size: 14px; color: var(--muted); text-align: left; }
 
-  footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
+  footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 0;
+    text-align: center;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    z-index: 100;
+  }
+  footer p { margin: 0; }
   footer a { color: var(--kg); text-decoration: none; }
 
   @media (max-width: 600px) {

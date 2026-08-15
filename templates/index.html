@@ -25,6 +25,7 @@
     color: var(--ink);
     font-family: Georgia, serif;
     line-height: 1.6;
+    padding-bottom: 52px;
   }
   .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
 
@@ -161,22 +162,34 @@
   }
 
   .pain-list { margin: 18px 0 6px; }
-  .pain-item {
+  .pain-item { padding: 12px 0; border-bottom: 1px solid #f0f0f0; }
+  .pain-item:last-child { border-bottom: none; }
+  .pain-item summary {
     display: flex;
     gap: 12px;
-    padding: 12px 0;
-    border-bottom: 1px solid #f0f0f0;
+    align-items: baseline;
+    cursor: pointer;
+    list-style: none;
+    font-weight: bold;
+    color: var(--ink);
   }
-  .pain-item:last-child { border-bottom: none; }
+  .pain-item summary::-webkit-details-marker { display: none; }
+  .pain-item summary::after {
+    content: "\2304";
+    margin-left: 8px;
+    color: var(--kg);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 400;
+  }
+  .pain-item[open] summary::after { content: "\2303"; }
   .pain-item .dot {
     flex: 0 0 auto;
     width: 7px; height: 7px;
     border-radius: 50%;
     background: var(--kg);
-    margin-top: 8px;
+    margin-top: 6px;
   }
-  .pain-item p { margin: 0; font-size: 14px; color: var(--muted); }
-  .pain-item strong { color: var(--ink); }
+  .pain-item p { margin: 8px 0 0 19px; font-size: 14px; color: var(--muted); }
 
   .built-teaser {
     background: var(--bg-alt);
@@ -213,7 +226,21 @@
   }
   form.inquiry button:hover { opacity: 0.9; }
 
-  footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
+  footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 0;
+    text-align: center;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    z-index: 100;
+  }
+  footer p { margin: 0; }
   footer a { color: var(--kg); text-decoration: none; }
 
   @media (max-width: 600px) {
@@ -288,10 +315,22 @@
   <p>KairosGeist ist eine Workforce-Planning-Engine für unabhängige Hotels in der gesamten DACH-Region — mit Fokus auf die jeweiligen Arbeitszeitgesetze (ArbZG in Deutschland, AZG in Österreich, ArG in der Schweiz) und die wöchentlichen Planungsprobleme, die damit einhergehen. Wir sind Pre-Seed und entwickeln das Produkt direkt gemeinsam mit unabhängigen Hotels — nicht von außen erraten.</p>
 
   <div class="pain-list">
-    <div class="pain-item"><span class="dot"></span><p><strong>Kein sauberer Nachweis — und das aufzubauen sollte nicht Ihre Aufgabe sein.</strong> Kommt es zu einem Streitfall oder fragt die Arbeitsschutzbehörde nach, sollte die Rekonstruktion — wer was wann beantragt hat, warum eine Schicht so besetzt wurde — nicht bedeuten, Aufzeichnungen aus dem Gedächtnis wieder aufzubauen. Der Nachweis sollte bereits existieren; eine Aufsichtsperson oder Führungskraft sollte ihn nur noch bestätigen müssen, nicht erstellen.</p></div>
-    <div class="pain-item"><span class="dot"></span><p><strong>Stärken Sie den Zusammenhalt in Ihrem Team.</strong> „Warum hat Maria immer Freitag frei?" — diese Frage muss gar nicht erst aufkommen, wenn Fairness über die Zeit sichtbar ist, nicht nur im Moment gefühlt wird. Die besten Teams fühlen sich schon wie Familie an; wir wollen nur helfen, dass das so bleibt.</p></div>
-    <div class="pain-item"><span class="dot"></span><p><strong>Freiwünsche gehen unter.</strong> Eine Nachricht auf WhatsApp, ein kurzer Hinweis zwischendurch — manches wird erinnert, manches nicht, und aus dem Vergessenen wird die nächste Fairness-Beschwerde.</p></div>
-    <div class="pain-item"><span class="dot"></span><p><strong>Erfahrungswissen verlässt mit der Aufsichtsperson den Betrieb.</strong> Wechselt Ihre beste Aufsichtsperson den Betrieb oder verlässt das Unternehmen, geht das aufgebaute Urteilsvermögen — wer gut zusammenarbeitet, welche Muster das Team zufrieden halten — mit ihr. Die nächste Person fängt bei null an.</p></div>
+    <details class="pain-item">
+      <summary><span class="dot"></span>Kein sauberer Nachweis — und das aufzubauen sollte nicht Ihre Aufgabe sein.</summary>
+      <p>Kommt es zu einem Streitfall oder fragt die Arbeitsschutzbehörde nach, sollte die Rekonstruktion — wer was wann beantragt hat, warum eine Schicht so besetzt wurde — nicht bedeuten, Aufzeichnungen aus dem Gedächtnis wieder aufzubauen. Der Nachweis sollte bereits existieren; eine Aufsichtsperson oder Führungskraft sollte ihn nur noch bestätigen müssen, nicht erstellen.</p>
+    </details>
+    <details class="pain-item">
+      <summary><span class="dot"></span>Stärken Sie den Zusammenhalt in Ihrem Team.</summary>
+      <p>„Warum hat Maria immer Freitag frei?" — diese Frage muss gar nicht erst aufkommen, wenn Fairness über die Zeit sichtbar ist, nicht nur im Moment gefühlt wird. Die besten Teams fühlen sich schon wie Familie an; wir wollen nur helfen, dass das so bleibt.</p>
+    </details>
+    <details class="pain-item">
+      <summary><span class="dot"></span>Freiwünsche gehen unter.</summary>
+      <p>Eine Nachricht auf WhatsApp, ein kurzer Hinweis zwischendurch — manches wird erinnert, manches nicht, und aus dem Vergessenen wird die nächste Fairness-Beschwerde.</p>
+    </details>
+    <details class="pain-item">
+      <summary><span class="dot"></span>Erfahrungswissen verlässt mit der Aufsichtsperson den Betrieb.</summary>
+      <p>Wechselt Ihre beste Aufsichtsperson den Betrieb oder verlässt das Unternehmen, geht das aufgebaute Urteilsvermögen — wer gut zusammenarbeitet, welche Muster das Team zufrieden halten — mit ihr. Die nächste Person fängt bei null an.</p>
+    </details>
   </div>
 
   <div class="motto">System proposes. <span class="decide">Human decides.</span></div>
