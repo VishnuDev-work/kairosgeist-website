@@ -73,12 +73,12 @@
   .page-header p { color: var(--muted); margin: 0; }
 
   .product-layout { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
-  .product-text { flex: 1 1 380px; min-width: 280px; }
+  .product-text { flex: 1 1 380px; min-width: 0; }
   .product-text h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .product-text > p.lead { color: var(--muted); margin: 0 0 24px; }
 
-  .product-visual { flex: 1 1 320px; min-width: 260px; position: sticky; top: 24px; }
-  .laptop-mockup { position: relative; width: 100%; aspect-ratio: 7013 / 4093; }
+  .product-visual { flex: 1 1 320px; min-width: 0; max-width: 480px; position: sticky; top: 24px; }
+  .laptop-mockup { position: relative; width: 100%; max-width: 100%; aspect-ratio: 7013 / 4093; overflow: hidden; }
   .laptop-mockup .slides {
     position: absolute;
     left: 5.05%; top: 7.50%;
