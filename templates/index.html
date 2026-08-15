@@ -62,7 +62,7 @@
     font-weight: 700;
     font-size: 40px;
     letter-spacing: -0.02em;
-    margin: 18px 0 8px;
+    margin: 6px 0 8px;
   }
   .wordmark .a { color: var(--ink); }
   .wordmark .b { color: var(--kg); }
@@ -180,8 +180,12 @@
     color: var(--kg);
     font-family: 'Inter Tight', sans-serif;
     font-weight: 400;
+    font-size: 14px;
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.2s ease;
   }
-  .pain-item[open] summary::after { content: "\2303"; }
+  .pain-item[open] summary::after { transform: rotate(180deg); }
   .pain-item .dot {
     flex: 0 0 auto;
     width: 7px; height: 7px;

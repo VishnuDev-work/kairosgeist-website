@@ -89,8 +89,11 @@
     font-family: 'Inter Tight', sans-serif;
     font-weight: 400;
     font-size: 14px;
+    line-height: 1;
+    display: inline-block;
+    transition: transform 0.2s ease;
   }
-  .feature-card[open] summary::after { content: "\2303"; }
+  .feature-card[open] summary::after { transform: rotate(180deg); }
   .feature-icon { flex: 0 0 auto; color: var(--kg); }
   .feature-text p { margin: 8px 0 0 44px; font-size: 14px; color: var(--muted); }
 
