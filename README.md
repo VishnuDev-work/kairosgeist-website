@@ -5,19 +5,27 @@ Static site for kairosgeist.de. No backend, plain HTML/CSS — the only
 info ever needs to live in git (see **Configuring your own copy** below).
 
 German is the default language (served at the domain root); English lives
-under `/en/`. Pages, in both languages:
+under `/en/`. URLs are clean (no `.html`) — each page lives at
+`<slug>/index.html`, e.g. `/product/` not `/product.html`. Pages, in both
+languages:
 
-- `index.html` — Home
-- `product.html` — Product
-- `roadmap.html` — Roadmap
-- `team.html` — Team
-- `careers.html` / `apply.html` — Careers listing + application form (optional, see below)
-- `contact.html` — Contact
+- `/` — Home
+- `/product/` — Product
+- `/roadmap/` — Roadmap
+- `/team/` — Team
+- `/careers/` / `/apply/` — Careers listing + application form (optional, see below)
+- `/contact/` — Contact
+
+Every old `/page.html` URL still resolves — it's a tiny redirect stub
+(`<meta refresh>` + JS) pointing at the clean URL, so old links, bookmarks,
+and shares keep working.
 
 ## Structure
 
 The deployable pages at the repo root (and under `en/`) are **generated,
-not hand-edited** — they're built from `templates/` + `config.sh`. To
+not hand-edited** — they're built from `templates/` + `config.sh`. Real
+content lives at `templates/<slug>/index.html` (e.g. `templates/product/index.html`);
+the flat `templates/<slug>.html` files are just the redirect stubs. To
 change page content, edit the matching file under `templates/`, then run
 `./scripts/build.sh` to regenerate.
 
@@ -64,7 +72,7 @@ them. Before publishing your own copy, replace by hand:
   `<svg width="26" height="26" viewBox="0 0 200 200">` (nav) and
   `<svg class="logo-icon"` (hero) and swap in your own mark.
 - **Team photos**: `assets/team-vishnu.jpg` and `assets/team-vincy.jpg`,
-  referenced from `templates/team.html` / `templates/en/team.html`.
+  referenced from `templates/team/index.html` / `templates/en/team/index.html`.
   Replace the files (or repoint the `<img>` tags) with your own team's
   photos.
 - **All written content** — product description, roadmap, team bios, job
@@ -80,11 +88,13 @@ so you can add the DNS records Resend needs to verify you as a sender.
 If you don't have a domain, or don't want to set up Cloudflare + Resend,
 skip this feature entirely:
 
-1. Delete `careers.html`, `apply.html`, `en/careers.html`, `en/apply.html`
-   and their counterparts under `templates/`.
+1. Delete the `careers/` and `apply/` directories (and `en/careers/`,
+   `en/apply/`) plus their `templates/careers/`, `templates/apply/`
+   counterparts and the `templates/careers.html` / `templates/apply.html`
+   redirect stubs (and `en/` equivalents).
 2. Delete `_careers-worker/` and `templates/_careers-worker/`.
 3. Remove the "Careers" / "Karriere" nav link from the remaining
-   templates (search for `careers.html` under `templates/`).
+   templates (search for `/careers/` under `templates/`).
 4. Leave `WORKER_URL` and `CORS_ORIGIN` blank in `config.sh` — they're
    unused once step 1–2 are done.
 
@@ -105,8 +115,14 @@ rerun `./scripts/build.sh`.
 
 ## Local preview
 
-Just open any generated `.html` file directly in a browser — no server
-required.
+Clean URLs need directory-index resolution, which a bare double-click
+(`file://`) won't do. Run a local server from the repo root instead:
+
+```
+python3 -m http.server 8000
+```
+
+then visit `http://localhost:8000/`.
 
 ## Deploying
 
@@ -128,7 +144,7 @@ required.
    - Set `CORS_ORIGIN` in `config.sh` to `https://yourdomain.com`
 
    **Without a custom domain**: every link on this site is root-absolute
-   (`/product.html`, `/assets/...`), so it only works unmodified if it's
+   (`/product/`, `/assets/...`), so it only works unmodified if it's
    served from the *true root* of a domain — not from a subpath like
    `username.github.io/repo-name/`, where those links would 404. The fix
    is to name the repo exactly `<your-github-username>.github.io` — GitHub
