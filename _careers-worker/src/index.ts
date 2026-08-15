@@ -187,7 +187,7 @@ export default {
       from: FROM_ADDRESS,
       to: email,
       subject: `Your application for ${safePosition} — KairosGeist`,
-      text: `Hi ${safeName},\n\nThanks for applying to KairosGeist for the ${safePosition} role. We've received your CV${coverLetter ? " and cover letter" : ""} and will be in touch if it's a fit.\n\n— The KairosGeist team`,
+      text: `Hi ${safeName},\n\nThanks for applying to KairosGeist for the ${safePosition} role. We've received your CV${coverLetter ? " and cover letter" : ""} and will let you know the outcome either way, once we've had a chance to review it.\n\n— The KairosGeist team`,
     };
 
     const [teamResult, confirmResult] = await Promise.allSettled([
