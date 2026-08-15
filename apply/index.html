@@ -214,7 +214,9 @@
 
 <footer class="wrap">
   <p>Erreichen Sie das Team unter <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
+  <p>&copy; <span id="copyright-year"></span> KairosGeist. Alle Rechte vorbehalten.</p>
 </footer>
+<script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
 
 <script>
   const params = new URLSearchParams(location.search);

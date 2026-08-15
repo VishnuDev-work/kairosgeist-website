@@ -35,7 +35,7 @@
     color: var(--ink);
     font-family: Georgia, serif;
     line-height: 1.6;
-    padding-bottom: 52px;
+    padding-bottom: 95px;
   }
   .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
 
@@ -217,7 +217,9 @@
   <p><strong>Vishnu Devadas</strong> &middot; Founder<br/>
   <a href="mailto:__FOUNDER_EMAIL__">__FOUNDER_EMAIL__</a><br/>
   <span style="font-size:12px; color:#999;">or reach the team directly at</span> <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a></p>
+  <p>&copy; <span id="copyright-year"></span> KairosGeist. All rights reserved.</p>
 </footer>
+<script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
 
 <script>
   const form = document.getElementById('inquiry-form');
