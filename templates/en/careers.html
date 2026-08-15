@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Careers — KairosGeist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --kg: #3DC9B8;
+    --ink: #111;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --muted: #555;
+    --border: #e4e4e4;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .site-nav .brand svg { color: var(--kg); }
+  .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .site-nav .brand-word .a { color: var(--ink); }
+  .site-nav .brand-word .b { color: var(--kg); }
+  .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
+  .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
+  .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .site-nav .nav-links a:hover { color: var(--kg); }
+  .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
+  .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
+  .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
+  .site-nav .lang-links a:hover { color: var(--kg); }
+
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  p { margin: 0 0 14px; }
+
+  .page-header { padding: 50px 0 10px; border-top: none; }
+  .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .page-header p { color: var(--muted); margin: 0; }
+
+  .job-card { border: 1px solid var(--border); border-radius: 4px; padding: 22px 24px; }
+  .job-card .job-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 19px; margin: 0 0 4px; }
+  .job-card .job-meta { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); letter-spacing: 0.3px; margin-bottom: 16px; }
+  .job-card summary { cursor: pointer; font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 600; color: var(--kg); list-style: none; }
+  .job-card summary::-webkit-details-marker { display: none; }
+  .job-card summary::after { content: " \2304"; }
+  .job-card details[open] summary::after { content: " \2303"; }
+  .job-desc { margin-top: 18px; }
+  .job-desc h4 { font-family: 'Inter Tight', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin: 20px 0 8px; }
+  .job-desc h4:first-child { margin-top: 0; }
+  .job-desc ul { margin: 0 0 14px; padding-left: 20px; }
+  .job-desc li { margin-bottom: 6px; font-size: 14px; }
+  .job-apply-btn { display: inline-block; margin-top: 8px; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 13px; color: #fff; background: var(--kg); padding: 10px 20px; border-radius: 3px; text-decoration: none; }
+  .job-apply-btn:hover { opacity: 0.9; }
+
+  footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--kg); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    .site-nav .brand { order: 1; }
+    .site-nav .lang-links { order: 2; }
+    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
+    .page-header h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav wrap" aria-label="Main navigation">
+  <a href="/en/" class="brand">
+    <svg width="26" height="26" viewBox="0 0 200 200">
+      <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="100" cy="32" r="10" fill="currentColor"/>
+      <circle cx="100" cy="168" r="10" fill="currentColor"/>
+      <circle cx="32" cy="100" r="10" fill="currentColor"/>
+      <circle cx="168" cy="100" r="10" fill="currentColor"/>
+      <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="22" cy="100" r="8" fill="currentColor"/>
+      <circle cx="178" cy="100" r="8" fill="currentColor"/>
+      <circle cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    </svg>
+    <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="/en/">Home</a>
+    <a href="/en/product.html">Product</a>
+    <a href="/en/roadmap.html">Roadmap</a>
+    <a href="/en/team.html">Team</a>
+    <a href="/en/careers.html" class="active" aria-current="page">Careers</a>
+    <a href="/en/contact.html">Contact</a>
+  </div>
+  <div class="lang-links" aria-label="Language switcher">
+    <a href="/careers.html">DE</a> / <a href="/en/careers.html" class="active" aria-current="page">EN</a>
+  </div>
+</nav>
+
+<header class="page-header wrap">
+  <h1>Careers</h1>
+  <p>We're building this from zero, in Magdeburg. Here's what's open right now.</p>
+</header>
+
+<section class="wrap" style="border-top:none; padding-top:10px;">
+  <div class="job-card">
+    <div class="job-title">Co-Founder — Business &amp; Sales</div>
+    <div class="job-meta">Magdeburg &middot; DACH region &middot; Founding role &middot; Pre-seed</div>
+
+    <details>
+      <summary>View full description</summary>
+      <div class="job-desc">
+        <h4>Who We Are</h4>
+        <p>KairosGeist is a workforce planning engine for shift-based industries, currently focused on independent hotels, with care homes as a mid-term target market across the DACH region. We generate fair, legally compliant shift plans in seconds — enforcing ArbZG in Germany, AZG in Austria, and ArG in Switzerland — and we're building the intelligence layer this space has never had. We're pre-seed, applying for the EXIST grant, founded in Magdeburg. I'm the technical co-founder, building the product myself. What's missing is someone to own the business side from zero.</p>
+
+        <h4>What You'll Do</h4>
+        <ul>
+          <li>Talk directly to hotel and care home operators to understand their real operational and compliance pain points</li>
+          <li>Turn early conversations into founding partner commitments</li>
+          <li>Own go-to-market strategy and execution — there's no existing playbook to follow, you'll write it</li>
+          <li>Build and run the sales pipeline, from first outreach to signed customer</li>
+          <li>Represent KairosGeist in person — visits, industry events, conversations across DACH</li>
+          <li>Shape pricing, partnership terms, and the onboarding experience alongside me</li>
+          <li>Feed real market feedback back into what we prioritize building next</li>
+        </ul>
+
+        <h4>What We're Looking For</h4>
+        <ul>
+          <li>Recently graduated, about to graduate, or available for a defined ~1-year commitment</li>
+          <li>Fluent in German and English</li>
+          <li>Comfortable owning sales, partnerships, and business strategy from scratch, with no established structure to step into</li>
+          <li>Motivated by real ambiguity — pre-seed means building the playbook, not executing one</li>
+          <li>Connections in hospitality or care home operations are a strong plus, not a requirement</li>
+        </ul>
+
+        <h4>What We Offer</h4>
+        <ul>
+          <li>A monthly salary funded through the EXIST-Gründungsstipendium, covering the defined ~1-year founding period (the grant application is in progress — funding isn't confirmed yet, so this is contingent, not guaranteed)</li>
+          <li>Real co-founder equity alongside the salary (exact terms to be discussed directly)</li>
+          <li>Genuine influence over company direction from day one</li>
+          <li>Hands-on experience building a company from zero, not joining one already running</li>
+        </ul>
+
+        <a class="job-apply-btn" href="/en/apply.html?position=Co-Founder%20%E2%80%94%20Business%20%26%20Sales">Apply for this role</a>
+      </div>
+    </details>
+  </div>
+
+  <div class="job-card" style="margin-top:16px;">
+    <div class="job-title">Didn't find what you're looking for?</div>
+    <div class="job-meta">Magdeburg &middot; DACH region &middot; Unsolicited application</div>
+    <p style="margin-top:14px;">No hard feelings if nothing above fits — tell us what you're great at and how you'd want to help, and we'll take it from there.</p>
+    <a class="job-apply-btn" href="/en/apply.html?position=Unsolicited%20Application">Send an unsolicited application</a>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>Reach the team at <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a></p>
+</footer>
+
+</body>
+</html>

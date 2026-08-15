@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="de" translate="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Produkt — KairosGeist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --kg: #3DC9B8;
+    --ink: #111;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --muted: #555;
+    --border: #e4e4e4;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .site-nav .brand svg { color: var(--kg); }
+  .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .site-nav .brand-word .a { color: var(--ink); }
+  .site-nav .brand-word .b { color: var(--kg); }
+  .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
+  .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
+  .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .site-nav .nav-links a:hover { color: var(--kg); }
+  .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
+  .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
+  .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
+  .site-nav .lang-links a:hover { color: var(--kg); }
+
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  p { margin: 0 0 14px; }
+
+  .page-header { padding: 50px 0 10px; border-top: none; }
+  .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .page-header p { color: var(--muted); margin: 0; }
+
+  .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .feature-card:last-child { border-bottom: none; }
+  .feature-icon { flex: 0 0 auto; color: var(--kg); margin-top: 2px; }
+  .feature-text p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  .pain-box {
+    background: #f0fbfa;
+    border: 1px solid var(--kg);
+    padding: 20px 22px;
+  }
+
+  .pricing-box {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--kg);
+    padding: 20px 22px;
+  }
+  .pricing-box a {
+    display: inline-block;
+    margin-top: 8px;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    color: #fff;
+    background: var(--kg);
+    padding: 9px 18px;
+    border-radius: 3px;
+    text-decoration: none;
+  }
+
+  footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--kg); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    .site-nav .brand { order: 1; }
+    .site-nav .lang-links { order: 2; }
+    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
+    header.hero { padding: 36px 0 44px; }
+    .wordmark { font-size: 30px; }
+    .tagline { font-size: 17px; }
+    .page-header h1 { font-size: 24px; }
+    .motto { font-size: 21px; padding: 16px 0; }
+    .founding-box .count { font-size: 24px; }
+    form.inquiry button { align-self: stretch; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav wrap" aria-label="Hauptnavigation">
+  <a href="/" class="brand">
+    <svg width="26" height="26" viewBox="0 0 200 200">
+      <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="100" cy="32" r="10" fill="currentColor"/>
+      <circle cx="100" cy="168" r="10" fill="currentColor"/>
+      <circle cx="32" cy="100" r="10" fill="currentColor"/>
+      <circle cx="168" cy="100" r="10" fill="currentColor"/>
+      <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="22" cy="100" r="8" fill="currentColor"/>
+      <circle cx="178" cy="100" r="8" fill="currentColor"/>
+      <circle cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    </svg>
+    <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="/">Home</a>
+    <a href="/product.html" class="active" aria-current="page">Produkt</a>
+    <a href="/roadmap.html">Roadmap</a>
+    <a href="/team.html">Team</a>
+    <a href="/careers.html">Karriere</a>
+    <a href="/contact.html">Kontakt</a>
+  </div>
+  <div class="lang-links" aria-label="Sprachauswahl">
+    <a href="/product.html" class="active" aria-current="page">DE</a> / <a href="/en/product.html">EN</a>
+  </div>
+</nav>
+
+<header class="page-header wrap">
+  <h1>Produkt</h1>
+  <p>Was heute bereits gebaut ist und im Einsatz läuft.</p>
+</header>
+
+<section class="wrap" style="border-top:none; padding-top:10px;">
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><rect x="6" y="10" width="16" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="3"/><rect x="16" y="16" width="16" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="3"/><rect x="26" y="10" width="16" height="22" rx="2" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+    <div class="feature-text">
+      <h3>Drei DACH-konforme Planoptionen, jede Woche</h3>
+      <p>Automatisch generiert. Sie wählen den Plan, der zu Ihrer Woche passt, und können ihn danach frei anpassen — das System sorgt dafür, dass er mit dem Arbeitszeitgesetz Ihres Landes konform bleibt (ArbZG, AZG oder ArG). Nie ein einzelner Nehmen-oder-lassen-Plan.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 24 L24 10" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M24 24 L34 30" stroke="currentColor" stroke-width="3" stroke-linecap="round"/></svg>
+    <div class="feature-text">
+      <h3>Automatische Zeitkonto-Führung</h3>
+      <p>Kein manuelles Nachrechnen mehr, wer Zeit gutgeschrieben bekommt oder im Minus ist — wird automatisch aktualisiert, sobald Pläne freigegeben werden.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><rect x="12" y="18" width="24" height="20" rx="3" fill="none" stroke="currentColor" stroke-width="3"/><path d="M17 18 V12 A7 7 0 0 1 31 12 V18" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="24" cy="27" r="2.5" fill="currentColor"/></svg>
+    <div class="feature-text">
+      <h3>Ein Sicherheitsnetz für jede Dienstplanänderung</h3>
+      <p>Harte Blockaden bei gesetzlichen Grenzen (11 Stunden Ruhezeit, maximal 6 Tage am Stück). Weiche Hinweise bei Präferenzkonflikten. Es wird unmöglich, versehentlich eine rechtswidrige Schicht zu planen — ohne Ihnen die Entscheidung abzunehmen.</p>
+    </div>
+  </div>
+
+  <div class="feature-card">
+    <svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M24 4 L42 11 V23 C42 34 34 42 24 44 C14 42 6 34 6 23 V11 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M16 24 L21 30 L33 17" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div class="feature-text">
+      <h3>Prüfungssichere Compliance-Berichte, auf Abruf</h3>
+      <p>Druckfertig pro Mitarbeiter, pro Zeitraum — geplante vs. tatsächliche Stunden, Differenz, Unterschrift. Das Dokument, das Sie einem Kontrolleur des Arbeitsamts vorlegen würden.</p>
+    </div>
+  </div>
+</section>
+
+
+<section class="wrap">
+  <h2>Preise</h2>
+  <div class="pricing-box">
+    <p style="margin-bottom:0;">Die Preise richten sich nach der Größe Ihres Betriebs und den Modulen, die Sie brauchen — inklusive der Konditionen für unser Founding-Partner-Programm (begrenzt auf 7 Hotels). Wir gehen das am liebsten im Gespräch durch.</p>
+    <a href="/contact.html">Preise erfragen</a>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Haben Sie ein konkretes Problem?</h2>
+  <div class="pain-box">
+    <p style="margin-bottom:0;">Wir entwickeln das Produkt mit Hotels, nicht nur für sie. Ihre konkreten operativen Anforderungen prägen mit, was wir als Nächstes bauen — erzählen Sie uns, was Sie tatsächlich Zeit kostet, und wir berücksichtigen es direkt in der Roadmap.</p>
+  </div>
+</section>
+
+<footer class="wrap">
+  <p>Erreichen Sie das Team unter <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a></p>
+</footer>
+
+</body>
+</html>

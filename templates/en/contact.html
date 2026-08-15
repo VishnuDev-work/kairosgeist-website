@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Contact — KairosGeist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --kg: #3DC9B8;
+    --ink: #111;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --muted: #555;
+    --border: #e4e4e4;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .site-nav .brand svg { color: var(--kg); }
+  .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .site-nav .brand-word .a { color: var(--ink); }
+  .site-nav .brand-word .b { color: var(--kg); }
+  .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
+  .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
+  .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .site-nav .nav-links a:hover { color: var(--kg); }
+  .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
+  .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
+  .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
+  .site-nav .lang-links a:hover { color: var(--kg); }
+
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  p { margin: 0 0 14px; }
+
+  .page-header { padding: 50px 0 10px; border-top: none; }
+  .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .page-header p { color: var(--muted); margin: 0; }
+
+  form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+  form.inquiry input, form.inquiry select, form.inquiry textarea {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: #fff;
+  }
+  form.inquiry textarea { min-height: 100px; resize: vertical; }
+  form.inquiry label { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: -6px; }
+  form.inquiry button {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    background: var(--kg);
+    color: #fff;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 3px;
+    cursor: pointer;
+    align-self: flex-start;
+  }
+  form.inquiry button { display: inline-flex; align-items: center; gap: 8px; }
+  form.inquiry button:hover { opacity: 0.9; }
+  form.inquiry button:disabled { opacity: 0.7; cursor: default; }
+  .btn-spinner { display: none; width: 15px; height: 15px; animation: spin 0.9s linear infinite; }
+  form.inquiry button:disabled .btn-spinner { display: inline-block; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  .form-status {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    padding: 12px 14px;
+    border-radius: 3px;
+    display: none;
+  }
+  .form-status.success { display: block; background: #f0fbfa; border: 1px solid var(--kg); color: #0d6b60; }
+  .form-status.error { display: block; background: #fdf0f0; border: 1px solid #d47a7a; color: #7a1f1f; }
+
+  footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--kg); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    .site-nav .brand { order: 1; }
+    .site-nav .lang-links { order: 2; }
+    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
+    header.hero { padding: 36px 0 44px; }
+    .wordmark { font-size: 30px; }
+    .tagline { font-size: 17px; }
+    .page-header h1 { font-size: 24px; }
+    .motto { font-size: 21px; padding: 16px 0; }
+    .founding-box .count { font-size: 24px; }
+    form.inquiry button { align-self: stretch; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav wrap" aria-label="Main navigation">
+  <a href="/en/" class="brand">
+    <svg width="26" height="26" viewBox="0 0 200 200">
+      <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="100" cy="32" r="10" fill="currentColor"/>
+      <circle cx="100" cy="168" r="10" fill="currentColor"/>
+      <circle cx="32" cy="100" r="10" fill="currentColor"/>
+      <circle cx="168" cy="100" r="10" fill="currentColor"/>
+      <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="22" cy="100" r="8" fill="currentColor"/>
+      <circle cx="178" cy="100" r="8" fill="currentColor"/>
+      <circle cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    </svg>
+    <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="/en/">Home</a>
+    <a href="/en/product.html">Product</a>
+    <a href="/en/roadmap.html">Roadmap</a>
+    <a href="/en/team.html">Team</a>
+    <a href="/en/careers.html">Careers</a>
+    <a href="/en/contact.html" class="active" aria-current="page">Contact</a>
+  </div>
+  <div class="lang-links" aria-label="Language switcher">
+    <a href="/contact.html">DE</a> / <a href="/en/contact.html" class="active" aria-current="page">EN</a>
+  </div>
+</nav>
+
+<header class="page-header wrap">
+  <h1>Get in touch</h1>
+  <p>Not a demo, not a pitch — just a short conversation about your scheduling and compliance pain points.</p>
+</header>
+
+<section class="wrap" style="border-top:none; padding-top:10px;">
+  <p>Send a message, or email us directly.</p>
+
+  <form class="inquiry" id="inquiry-form" action="https://formspree.io/f/__FORMSPREE_ID__" method="POST">
+    <label for="name">Name</label>
+    <input type="text" id="name" name="name" required />
+
+    <label for="property">Property name</label>
+    <input type="text" id="property" name="property" required />
+
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+
+    <label for="message">What would be useful for us to know?</label>
+    <textarea id="message" name="message" required></textarea>
+
+    <button type="submit">
+      <svg class="btn-spinner" viewBox="0 0 200 200" fill="none" stroke="currentColor">
+        <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" stroke-width="14" stroke-linecap="round"/>
+        <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" stroke-width="14" stroke-linecap="round"/>
+      </svg>
+      <span>Send</span>
+    </button>
+    <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
+  </form>
+</section>
+
+<footer class="wrap">
+  <p><strong>Vishnu Devadas</strong> &middot; Founder<br/>
+  <a href="mailto:__FOUNDER_EMAIL__">__FOUNDER_EMAIL__</a><br/>
+  <span style="font-size:12px; color:#999;">or reach the team directly at</span> <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a></p>
+</footer>
+
+<script>
+  const form = document.getElementById('inquiry-form');
+  const status = document.getElementById('form-status');
+  const button = form.querySelector('button[type="submit"]');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    button.disabled = true;
+    status.className = 'form-status';
+    status.textContent = '';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (response.ok) {
+        form.reset();
+        status.className = 'form-status success';
+        status.textContent = 'Thanks! Your message has been sent.';
+      } else {
+        status.className = 'form-status error';
+        status.textContent = 'Something went wrong. Please try again or email us directly.';
+      }
+    } catch (err) {
+      status.className = 'form-status error';
+      status.textContent = 'Something went wrong. Please try again or email us directly.';
+    } finally {
+      button.disabled = false;
+    }
+  });
+</script>
+
+</body>
+</html>

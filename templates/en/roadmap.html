@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Roadmap — KairosGeist</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --kg: #3DC9B8;
+    --ink: #111;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --muted: #555;
+    --border: #e4e4e4;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    line-height: 1.6;
+  }
+  .wrap { max-width: clamp(760px, 85vw, 1400px); margin: 0 auto; padding: 0 40px; }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .site-nav .brand svg { color: var(--kg); }
+  .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .site-nav .brand-word .a { color: var(--ink); }
+  .site-nav .brand-word .b { color: var(--kg); }
+  .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
+  .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
+  .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .site-nav .nav-links a:hover { color: var(--kg); }
+  .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
+  .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
+  .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
+  .site-nav .lang-links a:hover { color: var(--kg); }
+
+  section { padding: 40px 0; border-top: 1px solid var(--border); }
+  h2 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  h3 {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  p { margin: 0 0 14px; }
+
+  .page-header { padding: 50px 0 10px; border-top: none; }
+  .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .page-header p { color: var(--muted); margin: 0; }
+
+  .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .feature-card:last-child { border-bottom: none; }
+  .feature-icon { flex: 0 0 auto; color: var(--kg); margin-top: 2px; }
+  .feature-text p { margin: 0; font-size: 14px; color: var(--muted); }
+
+  .roadmap-flag {
+    display: inline-block;
+    background: #fff3cd;
+    border: 1px solid #d4a017;
+    color: #6b5200;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    margin-bottom: 10px;
+  }
+
+  .founding-box {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--kg);
+    padding: 20px 22px;
+  }
+  .founding-box .count {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: var(--kg);
+  }
+
+  footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--kg); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    .site-nav .brand { order: 1; }
+    .site-nav .lang-links { order: 2; }
+    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
+    header.hero { padding: 36px 0 44px; }
+    .wordmark { font-size: 30px; }
+    .tagline { font-size: 17px; }
+    .page-header h1 { font-size: 24px; }
+    .motto { font-size: 21px; padding: 16px 0; }
+    .founding-box .count { font-size: 24px; }
+    form.inquiry button { align-self: stretch; justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav wrap" aria-label="Main navigation">
+  <a href="/en/" class="brand">
+    <svg width="26" height="26" viewBox="0 0 200 200">
+      <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="100" cy="32" r="10" fill="currentColor"/>
+      <circle cx="100" cy="168" r="10" fill="currentColor"/>
+      <circle cx="32" cy="100" r="10" fill="currentColor"/>
+      <circle cx="168" cy="100" r="10" fill="currentColor"/>
+      <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="22" cy="100" r="8" fill="currentColor"/>
+      <circle cx="178" cy="100" r="8" fill="currentColor"/>
+      <circle cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    </svg>
+    <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="/en/">Home</a>
+    <a href="/en/product.html">Product</a>
+    <a href="/en/roadmap.html" class="active" aria-current="page">Roadmap</a>
+    <a href="/en/team.html">Team</a>
+    <a href="/en/careers.html">Careers</a>
+    <a href="/en/contact.html">Contact</a>
+  </div>
+  <div class="lang-links" aria-label="Language switcher">
+    <a href="/roadmap.html">DE</a> / <a href="/en/roadmap.html" class="active" aria-current="page">EN</a>
+  </div>
+</nav>
+
+<header class="page-header wrap">
+  <h1>Roadmap</h1>
+  <p>What we're building next, and how the founding partner program works.</p>
+</header>
+
+<section class="wrap" style="border-top:none; padding-top:10px;">
+  <h2><span class="roadmap-flag">Roadmap — not yet available</span></h2>
+  <div class="feature-card">
+    <div class="feature-text">
+      <h3>Daily housekeeping &amp; maintenance routing</h3>
+      <p>Reading your building's floor plan and live occupancy to auto-route housekeeping and maintenance, minimizing travel and prioritizing VIP rooms. Still in design — shaped by the hotels we partner with early, not guessed at from outside.</p>
+    </div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-text">
+      <h3>Direct PMS &amp; payroll integration</h3>
+      <p>Automatic data pull from your property management system, and DATEV-compatible payroll export. Today, this data is entered manually while these integrations are being built.</p>
+    </div>
+  </div>
+  <div class="feature-card">
+    <div class="feature-text">
+      <h3>KairosUhr — QR clock-in for time recording</h3>
+      <p>Rotating, single-use QR codes at your entrance for legally compliant time recording — no facial recognition, no buddy punching. Works standalone for properties that just need time recording, or as part of the full platform. Still in design.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Founding partner program</h2>
+  <div class="founding-box">
+    <div class="count">7 spots</div>
+    <p style="margin-top:10px;">We're opening a founding partner track, limited to seven independent hotels, with real and meaningful terms for those who choose to join early — the earlier you're in, the stronger the terms, and they stay in place for as long as you're a customer, not a temporary pilot rate.</p>
+    <p style="margin-bottom:0;">There's no obligation in getting in touch. The benefits only apply if and when you choose to become a founding partner — we're happy to walk through exactly what that looks like when we talk.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Something specific in mind?</h2>
+  <p style="margin-bottom:0;">Beyond what's listed here, we have other features in active development that aren't public yet. Before assuming something isn't on our list — <a href="/en/contact.html" style="color:var(--kg);">just ask us</a>. There's a good chance we're already working on it.</p>
+</section>
+
+<footer class="wrap">
+  <p>Reach the team at <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a></p>
+</footer>
+
+</body>
+</html>
