@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: __CORS_ORIGIN__/sitemap.xml

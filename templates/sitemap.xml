@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>__CORS_ORIGIN__/</loc></url>
+  <url><loc>__CORS_ORIGIN__/product/</loc></url>
+  <url><loc>__CORS_ORIGIN__/roadmap/</loc></url>
+  <url><loc>__CORS_ORIGIN__/team/</loc></url>
+  <url><loc>__CORS_ORIGIN__/careers/</loc></url>
+  <url><loc>__CORS_ORIGIN__/apply/</loc></url>
+  <url><loc>__CORS_ORIGIN__/contact/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/product/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/roadmap/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/team/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/careers/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/apply/</loc></url>
+  <url><loc>__CORS_ORIGIN__/en/contact/</loc></url>
+</urlset>

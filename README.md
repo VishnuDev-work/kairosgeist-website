@@ -102,6 +102,12 @@ them. Before publishing your own copy, replace by hand:
   referenced from `templates/team/index.html` / `templates/en/team/index.html`.
   Replace the files (or repoint the `<img>` tags) with your own team's
   photos.
+- **Favicon**: `assets/favicon.svg` — currently the same mark as the nav
+  logo, in the brand teal. Swap it for your own icon.
+- **Social preview image**: every page's `og:image` (see `<head>` in each
+  template) points at `assets/product-mockup-1.png` as a stand-in — swap
+  it for your own preview image, or point the `og:image` tags at something
+  more deliberately designed for link previews.
 - **All written content** — product description, roadmap, team bios, job
   postings — is specific to KairosGeist and needs rewriting for your own
   company; nothing here attempts to genericize prose.
