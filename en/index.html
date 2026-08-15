@@ -92,65 +92,6 @@
     margin-top: 24px;
   }
 
-  @keyframes kg-draw { to { stroke-dashoffset: 0; } }
-  @keyframes kg-pop {
-    0% { opacity: 0; transform: scale(0); }
-    60% { opacity: 1; transform: scale(1.15); }
-    100% { opacity: 1; transform: scale(1); }
-  }
-  @keyframes kg-fade-up {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  header.hero .logo-icon path,
-  header.hero .logo-icon line {
-    stroke-dasharray: 1;
-    stroke-dashoffset: 1;
-    animation: kg-draw 0.6s ease-out forwards;
-  }
-  header.hero .logo-icon circle {
-    transform-box: fill-box;
-    transform-origin: center;
-    opacity: 0;
-    animation: kg-pop 0.45s cubic-bezier(.34,1.56,.64,1) forwards;
-  }
-  header.hero .logo-icon .arc-1 { animation-delay: 0s; }
-  header.hero .logo-icon .arc-2 { animation-delay: .1s; }
-  header.hero .logo-icon .dot-top { animation-delay: .35s; }
-  header.hero .logo-icon .dot-bottom { animation-delay: .4s; }
-  header.hero .logo-icon .dot-left { animation-delay: .45s; }
-  header.hero .logo-icon .dot-right { animation-delay: .5s; }
-  header.hero .logo-icon .connector { animation-delay: .55s; }
-  header.hero .logo-icon .end-left { animation-delay: .8s; }
-  header.hero .logo-icon .end-right { animation-delay: .85s; }
-  header.hero .logo-icon .ring { animation-delay: .9s; }
-  header.hero .logo-icon .core { animation-delay: 1.2s; }
-  header.hero .wordmark,
-  header.hero .tagline,
-  header.hero .subtagline,
-  header.hero .stage-badge {
-    opacity: 0;
-    animation: kg-fade-up 0.5s ease-out forwards;
-  }
-  header.hero .wordmark { animation-delay: 1.35s; }
-  header.hero .tagline { animation-delay: 1.5s; }
-  header.hero .subtagline { animation-delay: 1.65s; }
-  header.hero .stage-badge { animation-delay: 1.8s; }
-  @media (prefers-reduced-motion: reduce) {
-    header.hero .logo-icon path,
-    header.hero .logo-icon line,
-    header.hero .logo-icon circle,
-    header.hero .wordmark,
-    header.hero .tagline,
-    header.hero .subtagline,
-    header.hero .stage-badge {
-      animation: none !important;
-      opacity: 1 !important;
-      stroke-dashoffset: 0 !important;
-      transform: none !important;
-    }
-  }
-
   section { padding: 40px 0; border-top: 1px solid var(--border); }
   h2 {
     font-family: 'Inter Tight', sans-serif;
@@ -355,17 +296,17 @@
 
 <header class="hero wrap">
   <svg class="logo-icon" viewBox="0 0 200 200" width="90" height="90">
-    <path class="arc-1" pathLength="1" d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-    <path class="arc-2" pathLength="1" d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
-    <circle class="dot-top" cx="100" cy="32" r="8" fill="currentColor"/>
-    <circle class="dot-bottom" cx="100" cy="168" r="8" fill="currentColor"/>
-    <circle class="dot-left" cx="32" cy="100" r="8" fill="currentColor"/>
-    <circle class="dot-right" cx="168" cy="100" r="8" fill="currentColor"/>
-    <line class="connector" pathLength="1" x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
-    <circle class="end-left" cx="22" cy="100" r="6" fill="currentColor"/>
-    <circle class="end-right" cx="178" cy="100" r="6" fill="currentColor"/>
-    <circle class="ring" cx="100" cy="100" r="24" fill="none" stroke="currentColor" stroke-width="4"/>
-    <circle class="core" cx="100" cy="100" r="14" fill="currentColor"/>
+    <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+    <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="100" cy="32" r="8" fill="currentColor"/>
+    <circle cx="100" cy="168" r="8" fill="currentColor"/>
+    <circle cx="32" cy="100" r="8" fill="currentColor"/>
+    <circle cx="168" cy="100" r="8" fill="currentColor"/>
+    <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="22" cy="100" r="6" fill="currentColor"/>
+    <circle cx="178" cy="100" r="6" fill="currentColor"/>
+    <circle cx="100" cy="100" r="24" fill="none" stroke="currentColor" stroke-width="4"/>
+    <circle cx="100" cy="100" r="14" fill="currentColor"/>
   </svg>
   <div class="wordmark notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></div>
   <div class="tagline">Intelligence of your <em>Workforce.</em></div>
