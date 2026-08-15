@@ -20,6 +20,7 @@
 <style>
   :root {
     --kg: #3DC9B8;
+    --kg-text: #248074;
     --ink: #111;
     --bg: #ffffff;
     --bg-alt: #fafafa;
@@ -51,15 +52,15 @@
   .site-nav .brand svg { color: var(--kg); }
   .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
   .site-nav .brand-word .a { color: var(--ink); }
-  .site-nav .brand-word .b { color: var(--kg); }
+  .site-nav .brand-word .b { color: var(--kg-text); }
   .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
   .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
   .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
-  .site-nav .nav-links a:hover { color: var(--kg); }
+  .site-nav .nav-links a:hover { color: var(--kg-text); }
   .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
   .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
   .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
-  .site-nav .lang-links a:hover { color: var(--kg); }
+  .site-nav .lang-links a:hover { color: var(--kg-text); }
 
   header.hero {
     padding: 50px 0 60px;
@@ -74,14 +75,14 @@
     margin: 6px 0 8px;
   }
   .wordmark .a { color: var(--ink); }
-  .wordmark .b { color: var(--kg); }
+  .wordmark .b { color: var(--kg-text); }
   .tagline {
     font-family: 'Instrument Serif', Georgia, serif;
     font-style: italic;
     font-size: 20px;
     color: var(--muted);
   }
-  .tagline em { color: var(--kg); font-style: italic; }
+  .tagline em { color: var(--kg-text); font-style: italic; }
   .subtagline {
     font-family: 'Inter Tight', sans-serif;
     font-size: 12px;
@@ -131,7 +132,7 @@
     border-bottom: 1px solid var(--kg);
     margin: 10px 0 30px;
   }
-  .motto .decide { color: var(--kg); }
+  .motto .decide { color: var(--kg-text); }
 
   .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
   .feature-card:last-child { border-bottom: none; }
@@ -161,7 +162,7 @@
     font-family: 'Inter Tight', sans-serif;
     font-weight: 700;
     font-size: 28px;
-    color: var(--kg);
+    color: var(--kg-text);
   }
 
   .pain-box {
@@ -186,7 +187,7 @@
   .pain-item summary::after {
     content: "\2304";
     margin-left: 8px;
-    color: var(--kg);
+    color: var(--kg-text);
     font-family: 'Inter Tight', sans-serif;
     font-weight: 400;
     font-size: 14px;
@@ -212,7 +213,7 @@
     margin-top: 20px;
     font-size: 14px;
   }
-  .built-teaser a { color: var(--kg); font-weight: 600; text-decoration: none; }
+  .built-teaser a { color: var(--kg-text); font-weight: 600; text-decoration: none; }
 
   form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
   form.inquiry input, form.inquiry select, form.inquiry textarea {
@@ -254,7 +255,7 @@
     z-index: 100;
   }
   footer p { margin: 0; }
-  footer a { color: var(--kg); text-decoration: none; }
+  footer a { color: var(--kg-text); text-decoration: none; }
 
   @media (max-width: 600px) {
     .wrap { padding: 0 18px; }

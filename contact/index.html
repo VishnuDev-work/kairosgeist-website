@@ -20,6 +20,7 @@
 <style>
   :root {
     --kg: #3DC9B8;
+    --kg-text: #248074;
     --ink: #111;
     --bg: #ffffff;
     --bg-alt: #fafafa;
@@ -51,15 +52,15 @@
   .site-nav .brand svg { color: var(--kg); }
   .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
   .site-nav .brand-word .a { color: var(--ink); }
-  .site-nav .brand-word .b { color: var(--kg); }
+  .site-nav .brand-word .b { color: var(--kg-text); }
   .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
   .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
   .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
-  .site-nav .nav-links a:hover { color: var(--kg); }
+  .site-nav .nav-links a:hover { color: var(--kg-text); }
   .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
   .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
   .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
-  .site-nav .lang-links a:hover { color: var(--kg); }
+  .site-nav .lang-links a:hover { color: var(--kg-text); }
 
   section.wrap { padding: 40px 0; border-top: 1px solid var(--border); }
   h2 {
@@ -131,7 +132,7 @@
     z-index: 100;
   }
   footer p { margin: 0; }
-  footer a { color: var(--kg); text-decoration: none; }
+  footer a { color: var(--kg-text); text-decoration: none; }
 
   @media (max-width: 600px) {
     .wrap { padding: 0 18px; }
