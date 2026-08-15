@@ -72,10 +72,27 @@
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .page-header p { color: var(--muted); margin: 0; }
 
-  .feature-card { display: flex; gap: 16px; padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
+  .feature-card { padding: 14px 0; border-bottom: 1px solid #f0f0f0; }
   .feature-card:last-child { border-bottom: none; }
-  .feature-icon { flex: 0 0 auto; color: var(--kg); margin-top: 2px; }
-  .feature-text p { margin: 0; font-size: 14px; color: var(--muted); }
+  .feature-card summary {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    cursor: pointer;
+    list-style: none;
+  }
+  .feature-card summary::-webkit-details-marker { display: none; }
+  .feature-card summary h3 { flex: 1; margin: 0; }
+  .feature-card summary::after {
+    content: "\2304";
+    color: var(--kg);
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+  }
+  .feature-card[open] summary::after { content: "\2303"; }
+  .feature-icon { flex: 0 0 auto; color: var(--kg); }
+  .feature-text p { margin: 8px 0 0 44px; font-size: 14px; color: var(--muted); }
 
   .roadmap-flag {
     display: inline-block;
@@ -174,24 +191,18 @@
 
 <section class="wrap" style="border-top:none; padding-top:10px;">
   <h2><span class="roadmap-flag">Roadmap — not yet available</span></h2>
-  <div class="feature-card">
-    <div class="feature-text">
-      <h3>Daily housekeeping &amp; maintenance routing</h3>
-      <p>Reading your building's floor plan and live occupancy to auto-route housekeeping and maintenance, minimizing travel and prioritizing VIP rooms. Still in design — shaped by the hotels we partner with early, not guessed at from outside.</p>
-    </div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-text">
-      <h3>Direct PMS &amp; payroll integration</h3>
-      <p>Automatic data pull from your property management system, and DATEV-compatible payroll export. Today, this data is entered manually while these integrations are being built.</p>
-    </div>
-  </div>
-  <div class="feature-card">
-    <div class="feature-text">
-      <h3>KairosUhr — QR clock-in for time recording</h3>
-      <p>Rotating, single-use QR codes at your entrance for legally compliant time recording — no facial recognition, no buddy punching. Works standalone for properties that just need time recording, or as part of the full platform. Still in design.</p>
-    </div>
-  </div>
+  <details class="feature-card">
+      <summary><h3>Daily housekeeping &amp; maintenance routing</h3></summary>
+      <div class="feature-text"><p>Reading your building's floor plan and live occupancy to auto-route housekeeping and maintenance, minimizing travel and prioritizing VIP rooms. Still in design — shaped by the hotels we partner with early, not guessed at from outside.</p></div>
+    </details>
+  <details class="feature-card">
+      <summary><h3>Direct PMS &amp; payroll integration</h3></summary>
+      <div class="feature-text"><p>Automatic data pull from your property management system, and DATEV-compatible payroll export. Today, this data is entered manually while these integrations are being built.</p></div>
+    </details>
+  <details class="feature-card">
+      <summary><h3>KairosUhr — QR clock-in for time recording</h3></summary>
+      <div class="feature-text"><p>Rotating, single-use QR codes at your entrance for legally compliant time recording — no facial recognition, no buddy punching. Works standalone for properties that just need time recording, or as part of the full platform. Still in design.</p></div>
+    </details>
 </section>
 
 <section class="wrap">
