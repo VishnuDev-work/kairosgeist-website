@@ -20,6 +20,33 @@ Every old `/page.html` URL still resolves — it's a tiny redirect stub
 (`<meta refresh>` + JS) pointing at the clean URL, so old links, bookmarks,
 and shares keep working.
 
+## Getting started
+
+If you just cloned or pulled this repo, here's the fastest path to a
+working local copy:
+
+```
+git clone <this-repo-url>
+cd kairosgeist-website
+cp config.example.sh config.sh   # fill in your own values, see "Configuring your own copy" below
+./scripts/build.sh                # generates the deployable pages from templates/
+python3 -m http.server 8000       # then visit http://localhost:8000/
+```
+
+Everything you'd actually edit lives under `templates/` — see **Structure**
+below before changing anything, since the root-level `*.html` files are
+generated output, not the source.
+
+## Working with Git
+
+If you're new to Git, the official docs are the best starting point:
+[git-scm.com/doc](https://git-scm.com/doc) (or GitHub's own walkthrough at
+[docs.github.com/get-started/using-git](https://docs.github.com/en/get-started/using-git)) —
+this README won't re-teach it. The short version for this repo: edit files
+under `templates/`, run `./scripts/build.sh`, then `git add`, `git commit`,
+`git push` as usual. `config.sh` is gitignored on purpose (see below) —
+never force-add it.
+
 ## Structure
 
 The deployable pages at the repo root (and under `en/`) are **generated,
