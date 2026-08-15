@@ -81,46 +81,6 @@
   .job-apply-btn { display: inline-block; margin-top: 8px; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 13px; color: #fff; background: var(--kg); padding: 10px 20px; border-radius: 3px; text-decoration: none; }
   .job-apply-btn:hover { opacity: 0.9; }
 
-  form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-  form.inquiry input, form.inquiry select, form.inquiry textarea {
-    font-family: Georgia, serif;
-    font-size: 14px;
-    padding: 10px 12px;
-    border: 1px solid var(--border);
-    border-radius: 3px;
-    background: #fff;
-  }
-  form.inquiry label { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: -6px; }
-  form.inquiry .hint { font-family: 'Inter Tight', sans-serif; font-size: 11px; color: #999; margin: -4px 0 0; }
-  form.inquiry button {
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 600;
-    font-size: 14px;
-    background: var(--kg);
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    align-self: flex-start;
-  }
-  form.inquiry button { display: inline-flex; align-items: center; gap: 8px; }
-  form.inquiry button:hover { opacity: 0.9; }
-  form.inquiry button:disabled { opacity: 0.7; cursor: default; }
-  .btn-spinner { display: none; width: 15px; height: 15px; animation: spin 0.9s linear infinite; }
-  form.inquiry button:disabled .btn-spinner { display: inline-block; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  .form-status {
-    font-family: 'Inter Tight', sans-serif;
-    font-size: 13px;
-    padding: 12px 14px;
-    border-radius: 3px;
-    display: none;
-  }
-  .form-status.success { display: block; background: #f0fbfa; border: 1px solid var(--kg); color: #0d6b60; }
-  .form-status.error { display: block; background: #fdf0f0; border: 1px solid #d47a7a; color: #7a1f1f; }
-
   footer { padding: 40px 0 80px; text-align: center; font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--muted); }
   footer a { color: var(--kg); text-decoration: none; }
 
@@ -130,7 +90,6 @@
     .site-nav .lang-links { order: 2; }
     .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
     .page-header h1 { font-size: 24px; }
-    form.inquiry button { align-self: stretch; justify-content: center; }
   }
 </style>
 </head>
@@ -210,83 +169,22 @@
           <li>Praktische Erfahrung, ein Unternehmen von Grund auf aufzubauen, statt einem bereits laufenden beizutreten</li>
         </ul>
 
-        <a class="job-apply-btn" href="#apply">Für diese Rolle bewerben</a>
+        <a class="job-apply-btn" href="/apply.html?position=Co-Founder%20%E2%80%94%20Business%20%26%20Sales">Für diese Rolle bewerben</a>
       </div>
     </details>
   </div>
-</section>
 
-<section class="wrap" id="apply">
-  <h2>Bewerben</h2>
-  <p>Senden Sie uns Ihren Lebenslauf und ein kurzes Anschreiben. Wir melden uns in jedem Fall zurück.</p>
-
-  <form class="inquiry" id="apply-form">
-    <input type="hidden" name="position" value="Co-Founder — Business &amp; Sales" />
-
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required />
-
-    <label for="email">E-Mail</label>
-    <input type="email" id="email" name="email" required />
-
-    <label for="cv">Lebenslauf</label>
-    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required />
-    <p class="hint">PDF oder Word, bis zu 8MB.</p>
-
-    <label for="coverLetter">Anschreiben</label>
-    <input type="file" id="coverLetter" name="coverLetter" accept=".pdf,.doc,.docx" required />
-    <p class="hint">PDF oder Word, bis zu 8MB.</p>
-
-    <button type="submit">
-      <svg class="btn-spinner" viewBox="0 0 200 200" fill="none" stroke="currentColor">
-        <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" stroke-width="14" stroke-linecap="round"/>
-        <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" stroke-width="14" stroke-linecap="round"/>
-      </svg>
-      <span>Bewerbung senden</span>
-    </button>
-    <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
-  </form>
+  <div class="job-card" style="margin-top:16px;">
+    <div class="job-title">Nichts Passendes dabei?</div>
+    <div class="job-meta">Magdeburg &middot; DACH-Region &middot; Initiativbewerbung</div>
+    <p style="margin-top:14px;">Wenn Sie keine passende Stelle sehen, aber trotzdem Teil des Teams werden möchten, freuen wir uns trotzdem über Ihre Bewerbung.</p>
+    <a class="job-apply-btn" href="/apply.html?position=Initiativbewerbung">Initiativbewerbung senden</a>
+  </div>
 </section>
 
 <footer class="wrap">
   <p>Erreichen Sie das Team unter <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
 </footer>
-
-<script>
-  const form = document.getElementById('apply-form');
-  const status = document.getElementById('form-status');
-  const button = form.querySelector('button[type="submit"]');
-  const APPLY_ENDPOINT = 'https://kairosgeist-careers.kairosgeist-careers-worker.workers.dev/apply';
-
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    button.disabled = true;
-    status.className = 'form-status';
-    status.textContent = '';
-
-    try {
-      const response = await fetch(APPLY_ENDPOINT, {
-        method: 'POST',
-        body: new FormData(form),
-      });
-      const data = await response.json().catch(() => ({}));
-
-      if (response.ok && data.ok) {
-        form.reset();
-        status.className = 'form-status success';
-        status.textContent = 'Danke! Wir haben Ihre Bewerbung erhalten und eine Bestätigung an Ihre E-Mail gesendet.';
-      } else {
-        status.className = 'form-status error';
-        status.textContent = data.error || 'Da ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
-      }
-    } catch (err) {
-      status.className = 'form-status error';
-      status.textContent = 'Da ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
-    } finally {
-      button.disabled = false;
-    }
-  });
-</script>
 
 </body>
 </html>

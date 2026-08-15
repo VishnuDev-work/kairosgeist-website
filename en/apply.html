@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="google" content="notranslate" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Contact — KairosGeist</title>
+<title>Apply — KairosGeist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -64,6 +64,7 @@
 
   .page-header { padding: 50px 0 10px; border-top: none; }
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .page-header .position { font-family: 'Inter Tight', sans-serif; font-size: 13px; color: var(--kg); font-weight: 600; letter-spacing: 0.3px; margin: 0 0 10px; }
   .page-header p { color: var(--muted); margin: 0; }
 
   form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
@@ -75,8 +76,8 @@
     border-radius: 3px;
     background: #fff;
   }
-  form.inquiry textarea { min-height: 100px; resize: vertical; }
   form.inquiry label { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: -6px; }
+  form.inquiry .hint { font-family: 'Inter Tight', sans-serif; font-size: 11px; color: #999; margin: -4px 0 0; }
   form.inquiry button {
     font-family: 'Inter Tight', sans-serif;
     font-weight: 600;
@@ -114,12 +115,7 @@
     .site-nav .brand { order: 1; }
     .site-nav .lang-links { order: 2; }
     .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
-    header.hero { padding: 36px 0 44px; }
-    .wordmark { font-size: 30px; }
-    .tagline { font-size: 17px; }
     .page-header h1 { font-size: 24px; }
-    .motto { font-size: 21px; padding: 16px 0; }
-    .founding-box .count { font-size: 24px; }
     form.inquiry button { align-self: stretch; justify-content: center; }
   }
 </style>
@@ -148,56 +144,65 @@
     <a href="/en/product.html">Product</a>
     <a href="/en/roadmap.html">Roadmap</a>
     <a href="/en/team.html">Team</a>
-    <a href="/en/careers.html">Careers</a>
-    <a href="/en/contact.html" class="active" aria-current="page">Contact</a>
+    <a href="/en/careers.html" class="active" aria-current="page">Careers</a>
+    <a href="/en/contact.html">Contact</a>
   </div>
   <div class="lang-links" aria-label="Language switcher">
-    <a href="/contact.html">DE</a> / <a href="/en/contact.html" class="active" aria-current="page">EN</a>
+    <a href="/apply.html" id="lang-de">DE</a> / <a href="/en/apply.html" class="active" aria-current="page">EN</a>
   </div>
 </nav>
 
 <header class="page-header wrap">
-  <h1>Get in touch</h1>
-  <p>Not a demo, not a pitch — just a short conversation about your scheduling and compliance pain points.</p>
+  <h1>Apply</h1>
+  <div class="position" id="position-display"></div>
+  <p>Send us your CV, and a cover letter if you'd like. We'll get back to you either way.</p>
 </header>
 
 <section class="wrap" style="border-top:none; padding-top:10px;">
-  <p>Send a message, or email us directly.</p>
+  <form class="inquiry" id="apply-form">
+    <input type="hidden" name="position" id="position-input" value="" />
 
-  <form class="inquiry" id="inquiry-form" action="https://formspree.io/f/mqpzbzov" method="POST">
     <label for="name">Name</label>
     <input type="text" id="name" name="name" required />
-
-    <label for="property">Property name</label>
-    <input type="text" id="property" name="property" required />
 
     <label for="email">Email</label>
     <input type="email" id="email" name="email" required />
 
-    <label for="message">What would be useful for us to know?</label>
-    <textarea id="message" name="message" required></textarea>
+    <label for="cv">CV</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required />
+    <p class="hint">PDF or Word, up to 8MB.</p>
+
+    <label for="coverLetter">Cover Letter (optional)</label>
+    <input type="file" id="coverLetter" name="coverLetter" accept=".pdf,.doc,.docx" />
+    <p class="hint">PDF or Word, up to 8MB.</p>
 
     <button type="submit">
       <svg class="btn-spinner" viewBox="0 0 200 200" fill="none" stroke="currentColor">
         <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" stroke-width="14" stroke-linecap="round"/>
         <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" stroke-width="14" stroke-linecap="round"/>
       </svg>
-      <span>Send</span>
+      <span>Submit application</span>
     </button>
     <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
   </form>
 </section>
 
 <footer class="wrap">
-  <p><strong>Vishnu Devadas</strong> &middot; Founder<br/>
-  <a href="mailto:founder@kairosgeist.de">founder@kairosgeist.de</a><br/>
-  <span style="font-size:12px; color:#999;">or reach the team directly at</span> <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
+  <p>Reach the team at <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
 </footer>
 
 <script>
-  const form = document.getElementById('inquiry-form');
+  const params = new URLSearchParams(location.search);
+  const position = params.get('position') || 'General Application';
+  document.getElementById('position-display').textContent = position;
+  document.getElementById('position-input').value = position;
+  document.title = position + ' — Apply — KairosGeist';
+  document.getElementById('lang-de').href = '/apply.html' + location.search;
+
+  const form = document.getElementById('apply-form');
   const status = document.getElementById('form-status');
   const button = form.querySelector('button[type="submit"]');
+  const APPLY_ENDPOINT = 'https://kairosgeist-careers.kairosgeist-careers-worker.workers.dev/apply';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -206,19 +211,20 @@
     status.textContent = '';
 
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch(APPLY_ENDPOINT, {
         method: 'POST',
         body: new FormData(form),
-        headers: { 'Accept': 'application/json' },
       });
+      const data = await response.json().catch(() => ({}));
 
-      if (response.ok) {
+      if (response.ok && data.ok) {
         form.reset();
+        document.getElementById('position-input').value = position;
         status.className = 'form-status success';
-        status.textContent = 'Thanks! Your message has been sent.';
+        status.textContent = "Thanks! We've received your application and sent a confirmation to your email.";
       } else {
         status.className = 'form-status error';
-        status.textContent = 'Something went wrong. Please try again or email us directly.';
+        status.textContent = data.error || 'Something went wrong. Please try again or email us directly.';
       }
     } catch (err) {
       status.className = 'form-status error';

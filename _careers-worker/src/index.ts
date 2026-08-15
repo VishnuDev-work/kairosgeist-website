@@ -80,9 +80,16 @@ async function sendResendEmail(apiKey: string, payload: ResendEmailPayload): Pro
   }
 }
 
-function validateFile(file: File | string | null, label: string): File | { error: string } {
+function validateFile(
+  file: File | string | null,
+  label: string,
+  required: boolean,
+): File | null | { error: string } {
   if (!(file instanceof File) || file.size === 0) {
-    return { error: `${label} is required` };
+    if (required) {
+      return { error: `${label} is required` };
+    }
+    return null;
   }
   if (file.size > MAX_FILE_BYTES) {
     return { error: `${label} is too large (max 8MB)` };
@@ -134,12 +141,13 @@ export default {
       return jsonResponse({ ok: false, error: "Position is required" }, 400, origin);
     }
 
-    const cvResult = validateFile(formData.get("cv"), "CV");
-    if ("error" in cvResult) {
-      return jsonResponse({ ok: false, error: cvResult.error }, 400, origin);
+    const cvResult = validateFile(formData.get("cv"), "CV", true);
+    if (cvResult === null || "error" in cvResult) {
+      const error = cvResult === null ? "CV is required" : cvResult.error;
+      return jsonResponse({ ok: false, error }, 400, origin);
     }
-    const coverLetterResult = validateFile(formData.get("coverLetter"), "Cover letter");
-    if ("error" in coverLetterResult) {
+    const coverLetterResult = validateFile(formData.get("coverLetter"), "Cover letter", false);
+    if (coverLetterResult !== null && "error" in coverLetterResult) {
       return jsonResponse({ ok: false, error: coverLetterResult.error }, 400, origin);
     }
 
@@ -147,11 +155,11 @@ export default {
     const coverLetter = coverLetterResult;
 
     let cvBase64: string;
-    let coverLetterBase64: string;
+    let coverLetterBase64: string | null;
     try {
       [cvBase64, coverLetterBase64] = await Promise.all([
         fileToBase64(cv),
-        fileToBase64(coverLetter),
+        coverLetter ? fileToBase64(coverLetter) : Promise.resolve(null),
       ]);
     } catch (err) {
       console.error("Failed to encode uploaded files", err);
@@ -161,23 +169,25 @@ export default {
     const safeName = name.trim().slice(0, 200);
     const safePosition = position.trim().slice(0, 200);
 
+    const attachments: ResendAttachment[] = [{ filename: cv.name || "cv", content: cvBase64 }];
+    if (coverLetter && coverLetterBase64) {
+      attachments.push({ filename: coverLetter.name || "cover-letter", content: coverLetterBase64 });
+    }
+
     const teamEmail: ResendEmailPayload = {
       from: FROM_ADDRESS,
       to: TEAM_EMAIL,
       reply_to: email,
       subject: `New application: ${safePosition} — ${safeName}`,
-      text: `New job application received.\n\nPosition: ${safePosition}\nName: ${safeName}\nEmail: ${email}\n\nCV and cover letter attached.`,
-      attachments: [
-        { filename: cv.name || "cv", content: cvBase64 },
-        { filename: coverLetter.name || "cover-letter", content: coverLetterBase64 },
-      ],
+      text: `New job application received.\n\nPosition: ${safePosition}\nName: ${safeName}\nEmail: ${email}\n\nCV${coverLetter ? " and cover letter" : ""} attached.`,
+      attachments,
     };
 
     const confirmationEmail: ResendEmailPayload = {
       from: FROM_ADDRESS,
       to: email,
-      subject: "We received your application — KairosGeist",
-      text: `Hi ${safeName},\n\nThanks for applying to KairosGeist for the ${safePosition} role. We've received your CV and cover letter and will be in touch if it's a fit.\n\n— The KairosGeist team`,
+      subject: `Your application for ${safePosition} — KairosGeist`,
+      text: `Hi ${safeName},\n\nThanks for applying to KairosGeist for the ${safePosition} role. We've received your CV${coverLetter ? " and cover letter" : ""} and will be in touch if it's a fit.\n\n— The KairosGeist team`,
     };
 
     const [teamResult, confirmResult] = await Promise.allSettled([
