@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="google" content="notranslate" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Kontakt — KairosGeist</title>
+<title>Karriere — KairosGeist</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
@@ -66,6 +66,21 @@
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
   .page-header p { color: var(--muted); margin: 0; }
 
+  .job-card { border: 1px solid var(--border); border-radius: 4px; padding: 22px 24px; }
+  .job-card .job-title { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 19px; margin: 0 0 4px; }
+  .job-card .job-meta { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); letter-spacing: 0.3px; margin-bottom: 16px; }
+  .job-card summary { cursor: pointer; font-family: 'Inter Tight', sans-serif; font-size: 13px; font-weight: 600; color: var(--kg); list-style: none; }
+  .job-card summary::-webkit-details-marker { display: none; }
+  .job-card summary::after { content: " \2304"; }
+  .job-card details[open] summary::after { content: " \2303"; }
+  .job-desc { margin-top: 18px; }
+  .job-desc h4 { font-family: 'Inter Tight', sans-serif; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin: 20px 0 8px; }
+  .job-desc h4:first-child { margin-top: 0; }
+  .job-desc ul { margin: 0 0 14px; padding-left: 20px; }
+  .job-desc li { margin-bottom: 6px; font-size: 14px; }
+  .job-apply-btn { display: inline-block; margin-top: 8px; font-family: 'Inter Tight', sans-serif; font-weight: 600; font-size: 13px; color: #fff; background: var(--kg); padding: 10px 20px; border-radius: 3px; text-decoration: none; }
+  .job-apply-btn:hover { opacity: 0.9; }
+
   form.inquiry { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
   form.inquiry input, form.inquiry select, form.inquiry textarea {
     font-family: Georgia, serif;
@@ -75,8 +90,8 @@
     border-radius: 3px;
     background: #fff;
   }
-  form.inquiry textarea { min-height: 100px; resize: vertical; }
   form.inquiry label { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--muted); margin-bottom: -6px; }
+  form.inquiry .hint { font-family: 'Inter Tight', sans-serif; font-size: 11px; color: #999; margin: -4px 0 0; }
   form.inquiry button {
     font-family: 'Inter Tight', sans-serif;
     font-weight: 600;
@@ -114,12 +129,7 @@
     .site-nav .brand { order: 1; }
     .site-nav .lang-links { order: 2; }
     .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
-    header.hero { padding: 36px 0 44px; }
-    .wordmark { font-size: 30px; }
-    .tagline { font-size: 17px; }
     .page-header h1 { font-size: 24px; }
-    .motto { font-size: 21px; padding: 16px 0; }
-    .founding-box .count { font-size: 24px; }
     form.inquiry button { align-self: stretch; justify-content: center; }
   }
 </style>
@@ -148,56 +158,105 @@
     <a href="/product.html">Produkt</a>
     <a href="/roadmap.html">Roadmap</a>
     <a href="/team.html">Team</a>
-    <a href="/careers.html">Karriere</a>
-    <a href="/contact.html" class="active" aria-current="page">Kontakt</a>
+    <a href="/careers.html" class="active" aria-current="page">Karriere</a>
+    <a href="/contact.html">Kontakt</a>
   </div>
   <div class="lang-links" aria-label="Sprachauswahl">
-    <a href="/contact.html" class="active" aria-current="page">DE</a> / <a href="/en/contact.html">EN</a>
+    <a href="/careers.html" class="active" aria-current="page">DE</a> / <a href="/en/careers.html">EN</a>
   </div>
 </nav>
 
 <header class="page-header wrap">
-  <h1>Kontakt aufnehmen</h1>
-  <p>Keine Demo, kein Pitch — nur ein kurzes Gespräch über Ihre Herausforderungen bei Planung und Compliance.</p>
+  <h1>Karriere</h1>
+  <p>Wir bauen das von Grund auf, in Magdeburg. Das ist aktuell offen.</p>
 </header>
 
 <section class="wrap" style="border-top:none; padding-top:10px;">
-  <p>Senden Sie uns eine Nachricht, oder schreiben Sie uns direkt.</p>
+  <div class="job-card">
+    <div class="job-title">Co-Founder — Business &amp; Sales</div>
+    <div class="job-meta">Magdeburg &middot; DACH-Region &middot; Gründungsposition &middot; Pre-Seed</div>
 
-  <form class="inquiry" id="inquiry-form" action="https://formspree.io/f/mqpzbzov" method="POST">
+    <details>
+      <summary>Vollständige Beschreibung ansehen</summary>
+      <div class="job-desc">
+        <h4>Wer wir sind</h4>
+        <p>KairosGeist ist eine Workforce-Planning-Engine für schichtbasierte Branchen, aktuell mit Fokus auf unabhängige Hotels, mit Pflegeeinrichtungen als mittelfristigem Zielmarkt in der gesamten DACH-Region. Wir erstellen faire, rechtskonforme Schichtpläne in Sekunden — unter Einhaltung des ArbZG in Deutschland, des AZG in Österreich und des ArG in der Schweiz — und bauen die Intelligence-Schicht, die es in diesem Bereich bisher nicht gab. Wir sind Pre-Seed, bewerben uns um die EXIST-Förderung und wurden in Magdeburg gegründet. Ich bin der technische Co-Founder und baue das Produkt selbst. Was fehlt, ist jemand, der die Business-Seite von Grund auf verantwortet.</p>
+
+        <h4>Ihre Aufgaben</h4>
+        <ul>
+          <li>Direkter Austausch mit Hotel- und Pflegeeinrichtungsbetreibern, um deren tatsächliche operative und Compliance-Herausforderungen zu verstehen</li>
+          <li>Frühe Gespräche in Zusagen als Founding Partner umwandeln</li>
+          <li>Go-to-Market-Strategie und -Umsetzung verantworten — es gibt noch kein bestehendes Playbook, Sie schreiben es</li>
+          <li>Sales-Pipeline aufbauen und betreiben, von der ersten Kontaktaufnahme bis zum unterschriebenen Kunden</li>
+          <li>KairosGeist persönlich vertreten — Besuche, Branchenveranstaltungen, Gespräche in der gesamten DACH-Region</li>
+          <li>Preisgestaltung, Partnerschaftskonditionen und Onboarding-Erlebnis gemeinsam mit mir gestalten</li>
+          <li>Echtes Marktfeedback direkt in unsere Priorisierung einfließen lassen</li>
+        </ul>
+
+        <h4>Was wir suchen</h4>
+        <ul>
+          <li>Kürzlich graduiert, kurz vor dem Abschluss, oder verfügbar für eine definierte Verpflichtung von ca. 1 Jahr</li>
+          <li>Fließend in Deutsch und Englisch</li>
+          <li>Wohlfühlt dabei, Sales, Partnerschaften und Business-Strategie von Grund auf zu verantworten, ohne bestehende Struktur</li>
+          <li>Motiviert durch echte Ambiguität — Pre-Seed bedeutet, das Playbook zu bauen, nicht eines auszuführen</li>
+          <li>Kontakte im Hotel- oder Pflegebereich sind ein starkes Plus, keine Voraussetzung</li>
+        </ul>
+
+        <h4>Was wir bieten</h4>
+        <ul>
+          <li>Ein monatliches Gehalt, finanziert über das EXIST-Gründungsstipendium, für die definierte Gründungsperiode von ca. 1 Jahr (der Förderantrag läuft — die Finanzierung ist noch nicht bestätigt, also ist dies eine Möglichkeit, keine Garantie)</li>
+          <li>Echtes Co-Founder-Equity zusätzlich zum Gehalt (genaue Konditionen werden direkt besprochen)</li>
+          <li>Echten Einfluss auf die Unternehmensrichtung von Tag eins an</li>
+          <li>Praktische Erfahrung, ein Unternehmen von Grund auf aufzubauen, statt einem bereits laufenden beizutreten</li>
+        </ul>
+
+        <a class="job-apply-btn" href="#apply">Für diese Rolle bewerben</a>
+      </div>
+    </details>
+  </div>
+</section>
+
+<section class="wrap" id="apply">
+  <h2>Bewerben</h2>
+  <p>Senden Sie uns Ihren Lebenslauf und ein kurzes Anschreiben. Wir melden uns in jedem Fall zurück.</p>
+
+  <form class="inquiry" id="apply-form">
+    <input type="hidden" name="position" value="Co-Founder — Business &amp; Sales" />
+
     <label for="name">Name</label>
     <input type="text" id="name" name="name" required />
-
-    <label for="property">Name der Unterkunft</label>
-    <input type="text" id="property" name="property" />
 
     <label for="email">E-Mail</label>
     <input type="email" id="email" name="email" required />
 
-    <label for="message">Was wäre für uns nützlich zu wissen? (optional)</label>
-    <textarea id="message" name="message"></textarea>
+    <label for="cv">Lebenslauf</label>
+    <input type="file" id="cv" name="cv" accept=".pdf,.doc,.docx" required />
+    <p class="hint">PDF oder Word, bis zu 8MB.</p>
+
+    <label for="coverLetter">Anschreiben</label>
+    <input type="file" id="coverLetter" name="coverLetter" accept=".pdf,.doc,.docx" required />
+    <p class="hint">PDF oder Word, bis zu 8MB.</p>
 
     <button type="submit">
       <svg class="btn-spinner" viewBox="0 0 200 200" fill="none" stroke="currentColor">
         <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" stroke-width="14" stroke-linecap="round"/>
         <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" stroke-width="14" stroke-linecap="round"/>
       </svg>
-      <span>Senden</span>
+      <span>Bewerbung senden</span>
     </button>
     <div class="form-status" id="form-status" role="status" aria-live="polite"></div>
   </form>
 </section>
 
 <footer class="wrap">
-  <p><strong>Vishnu Devadas</strong> &middot; Gründer<br/>
-  <a href="mailto:founder@kairosgeist.de">founder@kairosgeist.de</a><br/>
-  <span style="font-size:12px; color:#999;">oder erreichen Sie das Team direkt unter</span> <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
+  <p>Erreichen Sie das Team unter <a href="mailto:team@kairosgeist.de">team@kairosgeist.de</a></p>
 </footer>
 
 <script>
-  const form = document.getElementById('inquiry-form');
+  const form = document.getElementById('apply-form');
   const status = document.getElementById('form-status');
   const button = form.querySelector('button[type="submit"]');
+  const APPLY_ENDPOINT = 'https://kairosgeist-careers.kairosgeist-careers-worker.workers.dev/apply';
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -206,19 +265,19 @@
     status.textContent = '';
 
     try {
-      const response = await fetch(form.action, {
+      const response = await fetch(APPLY_ENDPOINT, {
         method: 'POST',
         body: new FormData(form),
-        headers: { 'Accept': 'application/json' },
       });
+      const data = await response.json().catch(() => ({}));
 
-      if (response.ok) {
+      if (response.ok && data.ok) {
         form.reset();
         status.className = 'form-status success';
-        status.textContent = 'Danke! Ihre Nachricht wurde gesendet.';
+        status.textContent = 'Danke! Wir haben Ihre Bewerbung erhalten und eine Bestätigung an Ihre E-Mail gesendet.';
       } else {
         status.className = 'form-status error';
-        status.textContent = 'Da ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
+        status.textContent = data.error || 'Da ist etwas schiefgelaufen. Bitte versuchen Sie es erneut oder schreiben Sie uns direkt per E-Mail.';
       }
     } catch (err) {
       status.className = 'form-status error';
