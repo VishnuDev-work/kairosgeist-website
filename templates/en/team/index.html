@@ -78,12 +78,13 @@
     padding-top: 10px;
   }
   .team-card {
+    position: relative;
     flex: 1 1 260px;
     text-align: center;
     background: var(--bg-alt);
     border: 1px solid var(--border);
     border-radius: 8px;
-    padding: 32px 26px;
+    padding: 32px 26px 56px;
   }
   .team-card img {
     width: 140px; height: 140px;
@@ -94,23 +95,28 @@
   }
   .team-card h3 { font-family: 'Inter Tight', sans-serif; font-size: 18px; margin: 0 0 2px; }
   .team-card .role { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--kg-text); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
-  .team-card p.bio { font-size: 14px; color: var(--muted); text-align: left; }
-  .linkedin-btn {
+  .team-card p.bio { font-size: 14px; color: var(--muted); text-align: left; margin-bottom: 0; }
+  .social-links {
+    position: absolute;
+    bottom: 18px;
+    right: 18px;
+    display: flex;
+    gap: 8px;
+  }
+  .social-links a {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    margin-top: 6px;
-    font-family: 'Inter Tight', sans-serif;
-    font-weight: 600;
-    font-size: 12px;
-    color: var(--kg-text);
-    border: 1px solid var(--kg);
-    padding: 7px 14px;
-    border-radius: 3px;
-    text-decoration: none;
-    transition: background 0.15s ease, color 0.15s ease;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
   }
-  .linkedin-btn:hover { background: var(--kg); color: var(--ink); }
+  .social-links a svg { width: 16px; height: 16px; }
+  .social-links a:hover { background: var(--kg); border-color: var(--kg); color: var(--ink); }
 
   footer {
     position: fixed;
@@ -183,7 +189,11 @@
     <h3>Vishnu Devadas</h3>
     <div class="role">Founder &amp; CEO</div>
     <p class="bio">Builds the product end to end &mdash; engine, compliance rules, and the workforce planning logic. Currently completing a Master's in Data and Knowledge Engineering at Otto-von-Guericke University Magdeburg.</p>
-    <a class="linkedin-btn" href="https://www.linkedin.com/in/vishnudevadas/" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/vishnudevadas/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24" fill="currentColor"><circle cx="5.5" cy="5.3" r="2.3"/><rect x="3.6" y="9.3" width="3.8" height="11.2" rx="1.4"/><rect x="10.3" y="9.3" width="3.4" height="11.2" rx="1.4"/><rect x="10.3" y="9.3" width="10" height="4.6" rx="2.3"/><rect x="17" y="12.9" width="3.4" height="7.6" rx="1.4"/></svg>
+      </a>
+    </div>
   </div>
   <div class="team-card">
     <img src="/assets/team-vincy.jpg" alt="Vincy Cherian" />
