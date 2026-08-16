@@ -18,3 +18,9 @@ WORKER_URL="https://your-worker.your-subdomain.workers.dev"
 # The origin your site is actually served from — must match exactly
 # (including https://, no trailing slash). Used by the Worker's CORS check.
 CORS_ORIGIN="https://yourdomain.com"
+
+# Optional — powers the /feedback/ pain-point survey. Leave unset (or as
+# '{}') and the page still builds, but shows "not configured" instead of
+# submitting. See README.md's "Feedback page" section for how to build the
+# 3 Google Forms and generate this JSON value.
+FEEDBACK_FORM_CONFIG_JSON='{}'

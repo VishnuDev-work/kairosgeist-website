@@ -24,6 +24,13 @@ for var in TEAM_EMAIL FORMSPREE_ID WORKER_URL CORS_ORIGIN; do
   fi
 done
 
+# Feedback page (Google Forms) is optional — unlike the vars above, an unset
+# value doesn't fail the build. It just renders the page in a visibly
+# "not configured" state instead of silently posting to someone else's forms.
+if [ -z "${FEEDBACK_FORM_CONFIG_JSON:-}" ]; then
+  FEEDBACK_FORM_CONFIG_JSON='{}'
+fi
+
 # macOS ships BSD sed (needs -i ''); GNU sed takes -i directly.
 sed_inplace() {
   if sed --version >/dev/null 2>&1; then
@@ -42,6 +49,7 @@ render() {
     -e "s/__FORMSPREE_ID__/${FORMSPREE_ID//\//\\/}/g" \
     -e "s#__WORKER_URL__#${WORKER_URL}#g" \
     -e "s#__CORS_ORIGIN__#${CORS_ORIGIN}#g" \
+    -e "s#__FEEDBACK_FORM_CONFIG_JSON__#${FEEDBACK_FORM_CONFIG_JSON}#g" \
     "$dest"
 }
 

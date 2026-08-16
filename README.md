@@ -15,6 +15,7 @@ languages:
 - `/team/` — Team
 - `/careers/` / `/apply/` — Careers listing + application form (optional, see below)
 - `/contact/` — Contact
+- `/feedback/` — role-branching pain-point survey (optional, see below)
 
 Every old `/page.html` URL still resolves — it's a tiny redirect stub
 (`<meta refresh>` + JS) pointing at the clean URL, so old links, bookmarks,
@@ -104,10 +105,49 @@ them. Before publishing your own copy, replace by hand:
   photos.
 - **Favicon**: `assets/favicon.svg` — currently the same mark as the nav
   logo, in the brand teal. Swap it for your own icon.
+- **Product page laptop mockup**: the Product page (`templates/product/index.html`,
+  `.laptop-mockup` block) crossfades through 4 screenshots inside a laptop
+  frame, one every 4 seconds — `assets/product-mockup-1.png` through
+  `-4.png`. These are also reused as the `og:image` social-preview image
+  (currently `-1.png`) on every page. Each one is a **complete,
+  pre-composited image** — the screenshot is already merged into the
+  laptop chrome, not layered on top of it with CSS. To make your own:
+  1. Take (or design) your product screenshot.
+  2. Composite it into `assets/laptop-chrome.png` — a 7013×4093 PNG with
+     a transparent cutout for the screen area (roughly the region from
+     5% from the left/top to 95%/88% of the image, i.e. pixel box
+     `(354, 307, 6659, 3612)` — measure `assets/laptop-chrome.png`'s own
+     alpha channel to confirm, since this may shift if you replace the
+     chrome art). Resize your screenshot to fill that box without
+     stretching (crop or letterbox, whichever loses less), then
+     alpha-composite the chrome on top so its opaque bezel covers
+     everything outside the cutout. A short PIL script is the
+     straightforward way to do this:
+     ```python
+     from PIL import Image
+     chrome = Image.open("assets/laptop-chrome.png").convert("RGBA")
+     shot = Image.open("your-screenshot.png").convert("RGBA")
+     cutout_box = (354, 307, 6659, 3612)  # (left, top, right, bottom)
+     w, h = cutout_box[2] - cutout_box[0], cutout_box[3] - cutout_box[1]
+     shot_fit = shot.resize((w, h))  # or crop-to-fit if aspect ratios differ
+     canvas = Image.new("RGBA", chrome.size, (0, 0, 0, 0))
+     canvas.paste(shot_fit, cutout_box[:2])
+     composited = Image.alpha_composite(canvas, chrome)
+     composited.resize((1600, 934)).convert("RGB").save("assets/product-mockup-1.png")
+     ```
+  3. Do this for each of the 4 slides, then open the Product page locally
+     and check the crossfade visually — small misalignments are much
+     easier to catch by eye than to compute.
+  This baked-image approach exists because an earlier version tried
+  layering a live screenshot over a static chrome PNG with CSS
+  positioning, and the percentage-based alignment never fully converged
+  across browsers — baking them together once with PIL sidesteps that
+  entirely. `assets/product-shot-*.png` are the raw, uncomposited
+  screenshots this repo's own mockups were built from — reference only,
+  not used by any page directly; safe to delete once you've made your own.
 - **Social preview image**: every page's `og:image` (see `<head>` in each
-  template) points at `assets/product-mockup-1.png` as a stand-in — swap
-  it for your own preview image, or point the `og:image` tags at something
-  more deliberately designed for link previews.
+  template) points at `assets/product-mockup-1.png` — covered above, since
+  it's the same file as slide 1 of the laptop mockup.
 - **All written content** — product description, roadmap, team bios, job
   postings — is specific to KairosGeist and needs rewriting for your own
   company; nothing here attempts to genericize prose.
@@ -146,6 +186,82 @@ Set `WORKER_URL` in `config.sh` to the URL `wrangler deploy` prints, and
 `CORS_ORIGIN` to whatever origin your site is actually served from, then
 rerun `./scripts/build.sh`.
 
+## Feedback page (optional)
+
+`/feedback/` is a role-branching pain-point survey (Owner/GM, Supervisor,
+Staff — each sees a different, relevant set of Likert-scale questions).
+It's linked from the Product page's "Have a specific pain point?" box,
+opens in a new tab, and closes itself a few seconds after submitting.
+
+**Why Google Forms as the backend:** free, zero setup, and responses land
+in a ready-to-analyze Sheet. The page itself is fully custom (your
+branding, your questions, auto-close on submit) — visitors never see the
+actual Google Form. It works by silently POSTing to the form's
+`formResponse` endpoint via a hidden iframe rather than a real `fetch()`
+call, because Google Forms doesn't send CORS headers the way Formspree
+does; a hidden-iframe POST sidesteps that restriction since the response
+is never read, only submitted.
+
+**If you don't want this feature**, leave `FEEDBACK_FORM_CONFIG_JSON`
+unset in `config.sh` (or set it to `'{}'`, same as the example file) — the
+page still builds and the link still shows, but submitting shows a
+"not configured" message instead of silently failing. To remove it
+entirely: delete `feedback/` and `en/feedback/` plus their
+`templates/feedback/`, `templates/en/feedback/` counterparts, and remove
+the "pain-box" link (search for `/feedback/` under `templates/`).
+
+**If you do want it, set it up like this:**
+
+1. Create 3 separate Google Forms — one each for Owner/GM, Supervisor, and
+   Staff — with whatever questions fit your business. (The live
+   KairosGeist version uses a 1–5 Likert scale per statement plus a
+   couple of multiple-choice context questions; adapt freely.) Turn off
+   "Collect email addresses" so responses stay anonymous.
+2. You only need **one language** of each form — it's a pure data
+   backend, never shown to visitors. Both the German and English
+   `/feedback/` pages can submit to the same 3 forms.
+3. Get each question's field ID (`entry.XXXXXXX`). Two ways to do this:
+   - **Manual**: open the form, fill it out once, use the "⋮" menu →
+     "Get pre-filled link", and read the `entry.XXXXXXX=value` pairs out
+     of the generated URL's query string — one per question, in order.
+   - **Faster, if you have a coding agent handy**: fetch the form's
+     `viewform` HTML (`curl -sL <form-url>`) and look for a
+     `FB_PUBLIC_LOAD_DATA_ = [...]` assignment in the page source — it's
+     a JSON array containing every question's text and field ID, so you
+     can parse it directly instead of manually testing pre-filled links.
+4. Build one JSON value shaped like this (this is what
+   `FEEDBACK_FORM_CONFIG_JSON` holds):
+
+   ```json
+   {
+     "owner": {
+       "action": "https://docs.google.com/forms/d/e/<FORM_ID>/formResponse",
+       "entries": { "q1": "entry.123", "q2": "entry.456", "...": "..." }
+     },
+     "supervisor": { "action": "...", "entries": { "...": "..." } },
+     "worker": { "action": "...", "entries": { "...": "..." } }
+   }
+   ```
+
+   The keys inside `entries` (`q1`, `q2`, etc.) must match the `name`
+   attributes on the `<select>`/radio inputs in
+   `templates/feedback/index.html` — if you change the questions, keep
+   the field names and the entries object in sync.
+5. Add it to `config.sh` as a single-quoted, single-line JSON string:
+
+   ```
+   FEEDBACK_FORM_CONFIG_JSON='{"owner":{"action":"...","entries":{...}},"supervisor":{...},"worker":{...}}'
+   ```
+
+6. Run `./scripts/build.sh`. Never paste real form IDs directly into
+   `templates/feedback/index.html` — they belong in `config.sh` only, same
+   as every other secret in this repo, so a fork doesn't inherit your live
+   forms.
+
+`/feedback/` carries a `noindex` meta tag on purpose — it's meant to be
+reached only via the direct link or a printed/QR code, never discovered
+through search or site navigation.
+
 ## Local preview
 
 Clean URLs need directory-index resolution, which a bare double-click
@@ -165,9 +281,19 @@ then visit `http://localhost:8000/`.
 2. **GitHub Pages** — pick one:
 
    **With a custom domain** (what kairosgeist.de uses):
+   - **Edit the `CNAME` file at the repo root first** — it's a plain text
+     file containing just `kairosgeist.de`, and GitHub Pages reads it to
+     set the custom domain automatically. Replace its contents with your
+     own domain before pushing, or Pages will try to serve your fork
+     under a domain you don't own and the deployment will silently fail
+     to work as expected. (It's a plain committed file, not gitignored or
+     templated — there was never a need to keep it out of git the way
+     `config.sh` is, since a domain name isn't a secret, but it does need
+     to be *yours*, not left as `kairosgeist.de`.)
    - Push this repo to GitHub, any repo name
    - In Settings → Pages, set the source branch (usually `main`) and save
-   - Under Settings → Pages → Custom domain, enter your domain
+   - Under Settings → Pages → Custom domain, enter your domain (should
+     already show what's in `CNAME`, confirming it took)
    - At your registrar, add:
      - Four `A` records for `@` pointing to GitHub Pages' IPs:
        `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`

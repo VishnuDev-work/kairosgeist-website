@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" translate="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="google" content="notranslate" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+<title>Quick Pain-Point Check — KairosGeist</title>
+<meta name="description" content="A two-minute, anonymous survey to help KairosGeist understand what actually costs independent hotels the most time and risk in scheduling." />
+<link rel="canonical" href="__CORS_ORIGIN__/en/feedback/" />
+<meta name="robots" content="noindex" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --kg: #3DC9B8;
+    --kg-text: #248074;
+    --ink: #111;
+    --bg: #ffffff;
+    --bg-alt: #fafafa;
+    --muted: #555;
+    --border: #e4e4e4;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: Georgia, serif;
+    line-height: 1.6;
+    padding-bottom: 52px;
+  }
+  .wrap { max-width: clamp(760px, 85vw, 900px); margin: 0 auto; padding: 0 40px; }
+
+  .site-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 0;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+  .site-nav .brand svg { color: var(--kg); }
+  .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
+  .site-nav .brand-word .a { color: var(--ink); }
+  .site-nav .brand-word .b { color: var(--kg-text); }
+
+  .page-header { padding: 50px 0 10px; }
+  .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
+  .page-header p { color: var(--muted); margin: 0; }
+
+  section.wrap { padding: 30px 0; }
+
+  .role-picker { display: flex; flex-direction: column; gap: 12px; margin-top: 10px; }
+  .role-btn {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-align: left;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--kg);
+    padding: 16px 18px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .role-btn:hover { background: #f0fbfa; }
+  .role-btn span.sub { display: block; font-family: Georgia, serif; font-weight: normal; font-size: 13px; color: var(--muted); margin-top: 4px; }
+
+  .q-block { display: none; }
+  .q-block.active { display: block; }
+
+  .q-context { margin-bottom: 6px; }
+  .q-context label {
+    display: block;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 16px 0 6px;
+  }
+  .q-context select {
+    font-family: Georgia, serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background: #fff;
+    width: 100%;
+  }
+
+  .likert { margin: 20px 0; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
+  .likert p.statement { font-size: 15px; margin: 0 0 10px; }
+  .likert-scale { display: flex; justify-content: space-between; gap: 6px; }
+  .likert-option {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    text-align: center;
+  }
+  .likert-option input { width: 18px; height: 18px; accent-color: var(--kg); }
+  .likert-endcap { font-size: 10px; color: #999; max-width: 70px; }
+
+  .q-open label {
+    display: block;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    margin: 20px 0 6px;
+  }
+  .q-open textarea {
+    width: 100%;
+    font-family: Georgia, serif;
+    font-size: 14px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  button.submit-btn {
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    background: var(--kg);
+    color: var(--ink);
+    border: none;
+    padding: 12px 24px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  button.submit-btn:hover { opacity: 0.9; }
+  button.submit-btn:disabled { opacity: 0.6; cursor: default; }
+
+  button.back-link {
+    display: inline-block;
+    margin-top: 16px;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: underline;
+    padding: 0;
+  }
+
+  .thanks-screen { display: none; text-align: center; padding: 60px 0; }
+  .thanks-screen.active { display: block; }
+  .thanks-screen h2 { font-family: 'Inter Tight', sans-serif; font-size: 22px; margin: 0 0 10px; }
+  .thanks-screen p { color: var(--muted); }
+
+  footer {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg);
+    border-top: 1px solid var(--border);
+    padding: 12px 0;
+    text-align: center;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    z-index: 100;
+  }
+  footer p { margin: 0; }
+  footer a { color: var(--kg-text); text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .wrap { padding: 0 18px; }
+    .page-header h1 { font-size: 24px; }
+    .likert-scale { gap: 2px; }
+    .likert-endcap { max-width: 50px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="site-nav wrap" aria-label="Main navigation">
+  <a href="/en/" class="brand">
+    <svg width="26" height="26" viewBox="0 0 200 200">
+      <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <path d="M 34.32 117.60 A 68 68 0 0 0 165.68 117.60" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="100" cy="32" r="10" fill="currentColor"/>
+      <circle cx="100" cy="168" r="10" fill="currentColor"/>
+      <circle cx="32" cy="100" r="10" fill="currentColor"/>
+      <circle cx="168" cy="100" r="10" fill="currentColor"/>
+      <line x1="22" y1="100" x2="178" y2="100" stroke="currentColor" stroke-width="6" stroke-linecap="round"/>
+      <circle cx="22" cy="100" r="8" fill="currentColor"/>
+      <circle cx="178" cy="100" r="8" fill="currentColor"/>
+      <circle cx="100" cy="100" r="28" fill="none" stroke="currentColor" stroke-width="6"/>
+      <circle cx="100" cy="100" r="16" fill="currentColor"/>
+    </svg>
+    <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
+  </a>
+</nav>
+
+<header class="page-header wrap">
+  <h1>Quick pain-point check</h1>
+  <p>Two minutes, fully anonymous. Helps us build what actually matters, not what we assume matters.</p>
+</header>
+
+<section class="wrap">
+
+  <div id="role-picker" class="role-picker">
+    <button class="role-btn" data-role="owner">I'm an Owner / General Manager<span class="sub">Property-wide view, business risk and cost</span></button>
+    <button class="role-btn" data-role="supervisor">I'm an Operations Manager / Supervisor<span class="sub">The person who actually builds the schedule</span></button>
+    <button class="role-btn" data-role="worker">I'm Staff / a Worker<span class="sub">Shift-based, on the floor</span></button>
+  </div>
+
+  <!-- OWNER / GM -->
+  <form class="q-block" id="form-owner" data-role="owner">
+    <div class="q-context">
+      <label>How many shift workers does your property employ?</label>
+      <select name="workers" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Fewer than 10</option>
+        <option>10–25</option>
+        <option>26–50</option>
+        <option>51–100</option>
+        <option>More than 100</option>
+      </select>
+    </div>
+    <div class="q-context">
+      <label>Which country is your property in?</label>
+      <select name="country" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Germany</option>
+        <option>Austria</option>
+        <option>Switzerland</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="q-context">
+      <label>How do you currently build your weekly schedule?</label>
+      <select name="tool" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Paper</option>
+        <option>Excel or spreadsheet</option>
+        <option>Scheduling software</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="likert" data-q="1">
+      <p class="statement">It's realistic for even a well-run hotel to miss a legal requirement — like rest periods or maximum hours — somewhere in day-to-day or weekly scheduling.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="2">
+      <p class="statement">Most hotels would struggle to produce a complete scheduling record quickly if a labor inspector asked for one today.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="3">
+      <p class="statement">For most hotels, confirming a supervisor's already-recorded weekly data with a single click — instead of compiling compliance documentation from scratch — would make audit-readiness significantly easier.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="4">
+      <p class="statement">It's common for shift and day-off distribution to feel less fair than it actually is, simply because there's no visible record over time.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="5">
+      <p class="statement">When a supervisor is suddenly unavailable, it's common for a hotel's scheduling process to be disrupted.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="6">
+      <p class="statement">Scheduling and fairness concerns are a realistic contributor to staff turnover in this industry.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="7">
+      <p class="statement">Most hotels would find it difficult to fully defend their current scheduling process under a formal review.</p>
+      <div class="likert-scale"></div>
+    </div>
+
+    <div class="q-open">
+      <label>What's the single biggest thing you'd want a scheduling process to solve? (optional)</label>
+      <textarea name="open"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+    <br/>
+    <button type="button" class="back-link" data-back="owner">&larr; back</button>
+  </form>
+
+  <!-- SUPERVISOR -->
+  <form class="q-block" id="form-supervisor" data-role="supervisor">
+    <div class="q-context">
+      <label>How many shift workers does your property employ?</label>
+      <select name="workers" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Fewer than 10</option>
+        <option>10–25</option>
+        <option>26–50</option>
+        <option>51–100</option>
+        <option>More than 100</option>
+      </select>
+    </div>
+    <div class="q-context">
+      <label>Which country is your property in?</label>
+      <select name="country" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Germany</option>
+        <option>Austria</option>
+        <option>Switzerland</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="q-context">
+      <label>How do you currently build your weekly schedule?</label>
+      <select name="tool" required>
+        <option value="" disabled selected>Choose one</option>
+        <option>Paper</option>
+        <option>Excel or spreadsheet</option>
+        <option>Scheduling software</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="likert" data-q="1">
+      <p class="statement">Building next week's schedule by hand takes longer than it should for most supervisors.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="2">
+      <p class="statement">It's realistic for even an experienced supervisor to miss a legal requirement — like rest periods or maximum hours — somewhere in day-to-day or weekly scheduling.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="3">
+      <p class="statement">Most supervisors would struggle to produce a complete scheduling record quickly if asked for one today.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="4">
+      <p class="statement">For most supervisors, confirming already-recorded weekly data with a single click — instead of compiling it from scratch — would make their week noticeably easier.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="5">
+      <p class="statement">It's common for a supervisor to have no reliable way to show, over time, that scheduling has actually been fair across the team.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="6">
+      <p class="statement">When a supervisor is suddenly unavailable, it's common for a hotel's scheduling process to be disrupted.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="7">
+      <p class="statement">Finding fair last-minute coverage when a worker calls in sick is a real source of stress for most supervisors.</p>
+      <div class="likert-scale"></div>
+    </div>
+
+    <div class="q-open">
+      <label>What's the single biggest time-waster or stress point in your current scheduling process? (optional)</label>
+      <textarea name="open"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+    <br/>
+    <button type="button" class="back-link" data-back="supervisor">&larr; back</button>
+  </form>
+
+  <!-- WORKER / STAFF -->
+  <form class="q-block" id="form-worker" data-role="worker">
+    <div class="likert" data-q="1">
+      <p class="statement">It's common for workers to feel their requests for specific days off aren't fully heard or considered.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="2">
+      <p class="statement">Without a visible record over time, it's easy for staff to doubt whether shifts and days off are being distributed fairly — even when they actually are.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="3">
+      <p class="statement">Many workers wouldn't be confident about who to raise a scheduling disagreement with, or whether they'd get a fair hearing.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="4">
+      <p class="statement">It's common for workers to feel like a name on a schedule rather than part of a team that looks out for them.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="5">
+      <p class="statement">When a colleague calls in sick, it's common for the rest of the team to end up overworked covering the gap.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="6">
+      <p class="statement">Last-minute coverage for a sick colleague often falls unfairly on the same few people, rather than being spread evenly.</p>
+      <div class="likert-scale"></div>
+    </div>
+    <div class="likert" data-q="7">
+      <p class="statement">It's common for workers to feel they have little real choice when asked to cover an extra shift on short notice.</p>
+      <div class="likert-scale"></div>
+    </div>
+
+    <div class="q-open">
+      <label>Is there anything about how shifts are assigned that you wish worked differently? (optional)</label>
+      <textarea name="open"></textarea>
+    </div>
+
+    <button type="submit" class="submit-btn">Submit</button>
+    <br/>
+    <button type="button" class="back-link" data-back="worker">&larr; back</button>
+  </form>
+
+  <div class="thanks-screen" id="thanks-screen">
+    <h2>Thank you.</h2>
+    <p>Your answers help us build what actually matters. This tab will close automatically&hellip; you can also just close it yourself.</p>
+  </div>
+
+</section>
+
+<iframe name="hidden_submit_frame" style="display:none;"></iframe>
+
+<footer class="wrap">
+  <p>&copy; <span id="copyright-year"></span> KairosGeist. All rights reserved.</p>
+</footer>
+<script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
+
+<script>
+  // ---- CONFIG: filled in from config.sh at build time (see README) ----
+  const FORM_CONFIG = __FEEDBACK_FORM_CONFIG_JSON__;
+  const SCALE_LABELS = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
+  const CLOSE_DELAY_MS = 4000;
+  const HOME_URL = '/en/'; // fallback only, if the browser blocks window.close()
+  // ---------------------------------------------------------
+
+  // Build the 1-5 radio scale into every .likert block
+  document.querySelectorAll('.likert').forEach((block) => {
+    const form = block.closest('form');
+    const qNum = block.dataset.q;
+    const scaleDiv = block.querySelector('.likert-scale');
+    for (let i = 1; i <= 5; i++) {
+      const opt = document.createElement('label');
+      opt.className = 'likert-option';
+      const endcap = i === 1
+        ? `<span class="likert-endcap">${SCALE_LABELS[0]}</span>`
+        : i === 5
+          ? `<span class="likert-endcap">${SCALE_LABELS[4]}</span>`
+          : '';
+      opt.innerHTML = `<input type="radio" name="q${qNum}" value="${i}" required />${endcap}<span>${i}</span>`;
+      scaleDiv.appendChild(opt);
+    }
+  });
+
+  // Role picker -> show matching form
+  document.querySelectorAll('.role-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const role = btn.dataset.role;
+      document.getElementById('role-picker').style.display = 'none';
+      document.getElementById(`form-${role}`).classList.add('active');
+    });
+  });
+
+  // Back link -> return to role picker
+  document.querySelectorAll('[data-back]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.q-block').forEach((f) => f.classList.remove('active'));
+      document.getElementById('role-picker').style.display = 'flex';
+    });
+  });
+
+  // Submit handling: build a hidden form targeting Google Forms' endpoint,
+  // POST via hidden iframe (avoids CORS issues with fetch), then show thanks
+  // and auto-redirect home.
+  document.querySelectorAll('form.q-block').forEach((visibleForm) => {
+    visibleForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const role = visibleForm.dataset.role;
+      const config = FORM_CONFIG[role];
+      if (!config || !config.action) {
+        alert('This survey isn\'t configured yet — see README.md ("Feedback page") for setup.');
+        return;
+      }
+      const data = new FormData(visibleForm);
+
+      const hiddenForm = document.createElement('form');
+      hiddenForm.action = config.action;
+      hiddenForm.method = 'POST';
+      hiddenForm.target = 'hidden_submit_frame';
+      hiddenForm.style.display = 'none';
+
+      for (const [name, value] of data.entries()) {
+        const entryId = config.entries[name];
+        if (!entryId) continue;
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = entryId;
+        input.value = value;
+        hiddenForm.appendChild(input);
+      }
+
+      document.body.appendChild(hiddenForm);
+      hiddenForm.submit();
+      hiddenForm.remove();
+
+      document.querySelectorAll('.q-block').forEach((f) => f.classList.remove('active'));
+      document.getElementById('thanks-screen').classList.add('active');
+
+      setTimeout(() => {
+        window.close();
+        // Fallback: some browsers block script-closing a tab the script
+        // didn't itself open (varies by how the link was activated). If
+        // close() didn't work, the tab is still here 500ms later — send
+        // the visitor back to the homepage instead of leaving them stuck.
+        setTimeout(() => { window.location.href = HOME_URL; }, 500);
+      }, CLOSE_DELAY_MS);
+    });
+  });
+</script>
+
+</body>
+</html>
