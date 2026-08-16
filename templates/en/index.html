@@ -40,13 +40,16 @@
   .wrap { max-width: clamp(760px, 85vw, 1600px); margin: 0 auto; padding: 0 40px; }
 
   .site-nav {
+    border-bottom: 1px solid var(--border);
+  }
+  .site-nav .wrap {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 16px;
-    padding: 20px 0;
+    padding-top: 20px;
+    padding-bottom: 20px;
     flex-wrap: wrap;
-    border-bottom: 1px solid var(--border);
   }
   .site-nav .brand { display: flex; align-items: center; gap: 8px; text-decoration: none; }
   .site-nav .brand svg { color: var(--kg); }
@@ -265,7 +268,8 @@
 </head>
 <body>
 
-<nav class="site-nav wrap" aria-label="Main navigation">
+<nav class="site-nav" aria-label="Main navigation">
+  <div class="wrap">
   <a href="/en/" class="brand">
     <svg width="26" height="26" viewBox="0 0 200 200">
       <path d="M 165.68 82.40 A 68 68 0 0 0 34.32 82.40" fill="none" stroke="currentColor" stroke-width="8" stroke-linecap="round"/>
@@ -292,6 +296,7 @@
   </div>
   <div class="lang-links" aria-label="Language switcher">
     <a href="/">DE</a> / <a href="/en/" class="active" aria-current="page">EN</a>
+  </div>
   </div>
 </nav>
 
@@ -341,8 +346,7 @@
 </section>
 
 <footer>
-  <p>Reach the team at <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a></p>
-  <p>&copy; <span id="copyright-year"></span> KairosGeist. All rights reserved.</p>
+  <p>Reach the team at <a href="mailto:__TEAM_EMAIL__">__TEAM_EMAIL__</a> &middot; &copy; <span id="copyright-year"></span> KairosGeist. All rights reserved.</p>
 </footer>
 <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
 
