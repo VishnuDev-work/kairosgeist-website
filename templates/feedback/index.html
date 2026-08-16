@@ -32,10 +32,10 @@
     line-height: 1.6;
     padding-bottom: 52px;
   }
-  .wrap { max-width: clamp(760px, 85vw, 900px); margin: 0 auto; padding: 0 40px; }
+  .wrap { max-width: clamp(760px, 85vw, 1100px); margin: 0 auto; padding: 0 40px; }
   /* Nav bar always scales like every other page's top bar, independent of
      this page's narrower content width above — same clamp values site-wide. */
-  .site-nav.wrap { max-width: clamp(760px, 85vw, 1400px); }
+  .site-nav.wrap { max-width: clamp(760px, 85vw, 1600px); }
 
   .site-nav {
     display: flex;
@@ -198,7 +198,7 @@
   footer a { color: var(--kg-text); text-decoration: none; }
 
   @media (max-width: 600px) {
-    .wrap { padding: 0 18px; }
+    .wrap { padding: 0 24px; }
     .page-header h1 { font-size: 24px; }
     .likert-scale { gap: 6px; }
     .likert-endcap { font-size: 9px; max-width: 46px; }
