@@ -33,6 +33,9 @@
     padding-bottom: 52px;
   }
   .wrap { max-width: clamp(760px, 85vw, 900px); margin: 0 auto; padding: 0 40px; }
+  /* Nav bar always scales like every other page's top bar, independent of
+     this page's narrower content width above — same clamp values site-wide. */
+  .site-nav.wrap { max-width: clamp(760px, 85vw, 1400px); }
 
   .site-nav {
     display: flex;
@@ -48,10 +51,6 @@
   .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
   .site-nav .brand-word .a { color: var(--ink); }
   .site-nav .brand-word .b { color: var(--kg-text); }
-  .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
-  .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
-  .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
-  .site-nav .nav-links a:hover { color: var(--kg-text); }
   .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
   .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
   .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
@@ -200,9 +199,6 @@
 
   @media (max-width: 600px) {
     .wrap { padding: 0 18px; }
-    .site-nav .brand { order: 1; }
-    .site-nav .lang-links { order: 2; }
-    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
     .page-header h1 { font-size: 24px; }
     .likert-scale { gap: 6px; }
     .likert-endcap { font-size: 9px; max-width: 46px; }
@@ -229,13 +225,6 @@
     </svg>
     <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
   </a>
-  <div class="nav-links">
-    <a href="/">Start</a>
-    <a href="/product/">Produkt</a>
-    <a href="/roadmap/">Roadmap</a>
-    <a href="/team/">Team</a>
-    <a href="/contact/">Kontakt</a>
-  </div>
   <div class="lang-links" aria-label="Sprachauswahl">
     <a href="/feedback/" class="active" aria-current="page">DE</a> / <a href="/en/feedback/">EN</a>
   </div>
