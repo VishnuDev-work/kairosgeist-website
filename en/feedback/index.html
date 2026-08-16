@@ -48,6 +48,14 @@
   .site-nav .brand-word { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 17px; letter-spacing: -0.01em; }
   .site-nav .brand-word .a { color: var(--ink); }
   .site-nav .brand-word .b { color: var(--kg-text); }
+  .site-nav .nav-links { display: flex; gap: 20px; font-family: 'Inter Tight', sans-serif; font-size: 13px; }
+  .site-nav .nav-links a { color: var(--muted); text-decoration: none; }
+  .site-nav .nav-links a.active { color: var(--ink); font-weight: 600; }
+  .site-nav .nav-links a:hover { color: var(--kg-text); }
+  .site-nav .lang-links { font-family: 'Inter Tight', sans-serif; font-size: 12px; letter-spacing: 0.5px; white-space: nowrap; }
+  .site-nav .lang-links a { color: var(--muted); text-decoration: none; padding: 2px 4px; }
+  .site-nav .lang-links a.active { color: var(--ink); font-weight: 700; }
+  .site-nav .lang-links a:hover { color: var(--kg-text); }
 
   .page-header { padding: 50px 0 10px; }
   .page-header h1 { font-family: 'Inter Tight', sans-serif; font-weight: 700; font-size: 30px; margin: 0 0 10px; letter-spacing: -0.01em; }
@@ -94,7 +102,21 @@
 
   .likert { margin: 20px 0; padding-bottom: 16px; border-bottom: 1px solid #f0f0f0; }
   .likert p.statement { font-size: 15px; margin: 0 0 10px; }
-  .likert-scale { display: flex; justify-content: space-between; gap: 6px; }
+  .likert-scale { display: flex; align-items: center; gap: 10px; }
+  .likert-endcap {
+    flex: 0 0 auto;
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 11px;
+    color: #999;
+    max-width: 72px;
+  }
+  .likert-endcap.right { text-align: right; }
+  .likert-options {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    gap: 6px;
+  }
   .likert-option {
     flex: 1;
     display: flex;
@@ -107,7 +129,6 @@
     text-align: center;
   }
   .likert-option input { width: 18px; height: 18px; accent-color: var(--kg); }
-  .likert-endcap { font-size: 10px; color: #999; max-width: 70px; }
 
   .q-open label {
     display: block;
@@ -179,9 +200,13 @@
 
   @media (max-width: 600px) {
     .wrap { padding: 0 18px; }
+    .site-nav .brand { order: 1; }
+    .site-nav .lang-links { order: 2; }
+    .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
     .page-header h1 { font-size: 24px; }
-    .likert-scale { gap: 2px; }
-    .likert-endcap { max-width: 50px; }
+    .likert-scale { gap: 6px; }
+    .likert-endcap { font-size: 9px; max-width: 46px; }
+    .likert-options { gap: 2px; }
   }
 </style>
 </head>
@@ -204,6 +229,16 @@
     </svg>
     <span class="brand-word notranslate" translate="no"><span class="a">Kairos</span><span class="b">Geist</span></span>
   </a>
+  <div class="nav-links">
+    <a href="/en/">Home</a>
+    <a href="/en/product/">Product</a>
+    <a href="/en/roadmap/">Roadmap</a>
+    <a href="/en/team/">Team</a>
+    <a href="/en/contact/">Contact</a>
+  </div>
+  <div class="lang-links" aria-label="Language switcher">
+    <a href="/feedback/">DE</a> / <a href="/en/feedback/" class="active" aria-current="page">EN</a>
+  </div>
 </nav>
 
 <header class="page-header wrap">
@@ -428,22 +463,30 @@
   const HOME_URL = '/en/'; // fallback only, if the browser blocks window.close()
   // ---------------------------------------------------------
 
-  // Build the 1-5 radio scale into every .likert block
+  // Build the 1-5 radio scale into every .likert block: label — [1..5] — label
   document.querySelectorAll('.likert').forEach((block) => {
-    const form = block.closest('form');
     const qNum = block.dataset.q;
     const scaleDiv = block.querySelector('.likert-scale');
+
+    const leftLabel = document.createElement('span');
+    leftLabel.className = 'likert-endcap';
+    leftLabel.textContent = SCALE_LABELS[0];
+    scaleDiv.appendChild(leftLabel);
+
+    const optionsDiv = document.createElement('div');
+    optionsDiv.className = 'likert-options';
     for (let i = 1; i <= 5; i++) {
       const opt = document.createElement('label');
       opt.className = 'likert-option';
-      const endcap = i === 1
-        ? `<span class="likert-endcap">${SCALE_LABELS[0]}</span>`
-        : i === 5
-          ? `<span class="likert-endcap">${SCALE_LABELS[4]}</span>`
-          : '';
-      opt.innerHTML = `<input type="radio" name="q${qNum}" value="${i}" required />${endcap}<span>${i}</span>`;
-      scaleDiv.appendChild(opt);
+      opt.innerHTML = `<input type="radio" name="q${qNum}" value="${i}" required /><span>${i}</span>`;
+      optionsDiv.appendChild(opt);
     }
+    scaleDiv.appendChild(optionsDiv);
+
+    const rightLabel = document.createElement('span');
+    rightLabel.className = 'likert-endcap right';
+    rightLabel.textContent = SCALE_LABELS[4];
+    scaleDiv.appendChild(rightLabel);
   });
 
   // Role picker -> show matching form
