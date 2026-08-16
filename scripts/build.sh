@@ -17,7 +17,7 @@ fi
 # shellcheck disable=SC1091
 source config.sh
 
-for var in TEAM_EMAIL FOUNDER_EMAIL FORMSPREE_ID WORKER_URL CORS_ORIGIN; do
+for var in TEAM_EMAIL FORMSPREE_ID WORKER_URL CORS_ORIGIN; do
   if [ -z "${!var:-}" ]; then
     echo "config.sh is missing a value for $var" >&2
     exit 1
@@ -39,7 +39,6 @@ render() {
   cp "$src" "$dest"
   sed_inplace \
     -e "s/__TEAM_EMAIL__/${TEAM_EMAIL//\//\\/}/g" \
-    -e "s/__FOUNDER_EMAIL__/${FOUNDER_EMAIL//\//\\/}/g" \
     -e "s/__FORMSPREE_ID__/${FORMSPREE_ID//\//\\/}/g" \
     -e "s#__WORKER_URL__#${WORKER_URL}#g" \
     -e "s#__CORS_ORIGIN__#${CORS_ORIGIN}#g" \

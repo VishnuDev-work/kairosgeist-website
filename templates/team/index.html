@@ -71,14 +71,22 @@
 
   .team-grid {
     display: flex;
-    gap: 32px;
+    align-items: stretch;
+    gap: 24px;
     flex-wrap: wrap;
     border-top: none;
     padding-top: 10px;
   }
-  .team-card { flex: 1; min-width: 220px; text-align: center; }
+  .team-card {
+    flex: 1 1 260px;
+    text-align: center;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 32px 26px;
+  }
   .team-card img {
-    width: 160px; height: 160px;
+    width: 140px; height: 140px;
     border-radius: 50%;
     object-fit: cover;
     border: 3px solid var(--kg);
@@ -87,6 +95,22 @@
   .team-card h3 { font-family: 'Inter Tight', sans-serif; font-size: 18px; margin: 0 0 2px; }
   .team-card .role { font-family: 'Inter Tight', sans-serif; font-size: 12px; color: var(--kg-text); font-weight: 600; letter-spacing: 0.5px; text-transform: uppercase; margin-bottom: 10px; }
   .team-card p.bio { font-size: 14px; color: var(--muted); text-align: left; }
+  .linkedin-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 6px;
+    font-family: 'Inter Tight', sans-serif;
+    font-weight: 600;
+    font-size: 12px;
+    color: var(--kg-text);
+    border: 1px solid var(--kg);
+    padding: 7px 14px;
+    border-radius: 3px;
+    text-decoration: none;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .linkedin-btn:hover { background: var(--kg); color: var(--ink); }
 
   footer {
     position: fixed;
@@ -111,7 +135,7 @@
     .site-nav .lang-links { order: 2; }
     .site-nav .nav-links { order: 3; width: 100%; justify-content: center; gap: 14px; font-size: 12px; margin-top: 4px; }
     .page-header h1 { font-size: 24px; }
-    .team-grid { flex-direction: column; align-items: center; }
+    .team-grid { flex-direction: column; align-items: stretch; }
     .team-card p.bio { text-align: center; }
   }
 </style>
@@ -159,6 +183,7 @@
     <h3>Vishnu Devadas</h3>
     <div class="role">Founder &amp; CEO</div>
     <p class="bio">Baut das Produkt von Grund auf &mdash; Engine, Compliance-Regeln und die Planungslogik. Schlie&szlig;t derzeit einen Master in Data and Knowledge Engineering an der Otto-von-Guericke-Universit&auml;t Magdeburg ab.</p>
+    <a class="linkedin-btn" href="https://www.linkedin.com/in/vishnudevadas/" target="_blank" rel="noopener noreferrer">LinkedIn &#8599;</a>
   </div>
   <div class="team-card">
     <img src="/assets/team-vincy.jpg" alt="Vincy Cherian" />

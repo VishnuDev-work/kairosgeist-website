@@ -76,9 +76,9 @@ committed.
 cp config.example.sh config.sh
 ```
 
-Fill in `config.sh` with your own `TEAM_EMAIL`, `FOUNDER_EMAIL`,
-`FORMSPREE_ID`, `WORKER_URL`, and `CORS_ORIGIN` (see comments in
-`config.example.sh` for what each one is), then run:
+Fill in `config.sh` with your own `TEAM_EMAIL`, `FORMSPREE_ID`,
+`WORKER_URL`, and `CORS_ORIGIN` (see comments in `config.example.sh` for
+what each one is), then run:
 
 ```
 ./scripts/build.sh

@@ -8,9 +8,6 @@
 # Shown in every page's footer as a mailto link.
 TEAM_EMAIL="team@yourdomain.com"
 
-# Shown alongside TEAM_EMAIL on the Contact page only.
-FOUNDER_EMAIL="founder@yourdomain.com"
-
 # From your Formspree form's endpoint: https://formspree.io/f/YOUR_ID
 FORMSPREE_ID="your_formspree_form_id"
 
