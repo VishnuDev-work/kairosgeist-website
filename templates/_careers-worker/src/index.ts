@@ -2,9 +2,15 @@ export interface Env {
   RESEND_API_KEY: string;
 }
 
+interface FeedbackRoleConfig {
+  action: string;
+  entries: Record<string, string>;
+}
+
 const ALLOWED_ORIGINS = new Set(["__CORS_ORIGIN__"]);
 const TEAM_EMAIL = "__TEAM_EMAIL__";
 const FROM_ADDRESS = "KairosGeist <__TEAM_EMAIL__>";
+const FEEDBACK_FORM_CONFIG: Record<string, FeedbackRoleConfig> = __FEEDBACK_FORM_CONFIG_JSON__;
 const MAX_FILE_BYTES = 8 * 1024 * 1024; // 8MB per file
 const ALLOWED_MIME_TYPES = new Set([
   "application/pdf",
@@ -103,6 +109,172 @@ function validateFile(
   return file;
 }
 
+async function handleFeedback(request: Request, env: Env, origin: string | null): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse({ ok: false, error: "Method not allowed" }, 405, origin);
+  }
+
+  let body: { role?: unknown; fields?: unknown };
+  try {
+    body = await request.json();
+  } catch {
+    return jsonResponse({ ok: false, error: "Invalid submission" }, 400, origin);
+  }
+
+  const role = body.role;
+  const fields = body.fields;
+  if (typeof role !== "string" || !fields || typeof fields !== "object") {
+    return jsonResponse({ ok: false, error: "Invalid submission" }, 400, origin);
+  }
+
+  const config = FEEDBACK_FORM_CONFIG[role];
+  if (!config || !config.action) {
+    console.error(`Feedback survey submitted for unconfigured role: ${role}`);
+    return jsonResponse({ ok: false, error: "Survey not configured" }, 500, origin);
+  }
+
+  const params = new URLSearchParams();
+  for (const [name, value] of Object.entries(fields as Record<string, unknown>)) {
+    const entryId = config.entries[name];
+    if (!entryId || typeof value !== "string") continue;
+    params.append(entryId, value);
+  }
+
+  // Two independent delivery paths: forward to Google Forms server-side
+  // (unlike a browser posting directly to Google, this response IS
+  // readable, since CORS only restricts browsers) and a backup email to
+  // the team inbox. As long as either one lands, the response isn't lost —
+  // that's the whole point versus the old client-side hidden-iframe POST,
+  // which had no way to know if Google actually received anything.
+  const [googleResult, backupResult] = await Promise.allSettled([
+    fetch(config.action, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: params.toString(),
+    }).then((r) => {
+      if (!r.ok) throw new Error(`Google Forms responded ${r.status}`);
+    }),
+    sendResendEmail(env.RESEND_API_KEY, {
+      from: FROM_ADDRESS,
+      to: TEAM_EMAIL,
+      subject: `Feedback survey response (${role})`,
+      text: `Anonymous feedback survey response.\n\nRole: ${role}\n\n${Object.entries(fields as Record<string, unknown>)
+        .map(([k, v]) => `${k}: ${v}`)
+        .join("\n")}`,
+    }),
+  ]);
+
+  if (googleResult.status === "rejected") {
+    console.error("Failed to forward feedback to Google Forms", googleResult.reason);
+  }
+  if (backupResult.status === "rejected") {
+    console.error("Failed to send feedback backup email", backupResult.reason);
+  }
+
+  const delivered = googleResult.status === "fulfilled" || backupResult.status === "fulfilled";
+  if (!delivered) {
+    return jsonResponse({ ok: false, error: "Failed to record your response. Please try again." }, 502, origin);
+  }
+
+  return jsonResponse({ ok: true }, 200, origin);
+}
+
+async function handleApply(request: Request, env: Env, origin: string | null): Promise<Response> {
+  if (request.method !== "POST") {
+    return jsonResponse({ ok: false, error: "Method not allowed" }, 405, origin);
+  }
+
+  let formData: FormData;
+  try {
+    formData = await request.formData();
+  } catch {
+    return jsonResponse({ ok: false, error: "Invalid form submission" }, 400, origin);
+  }
+
+  const name = formData.get("name");
+  const email = formData.get("email");
+  const position = formData.get("position");
+
+  if (typeof name !== "string" || !name.trim()) {
+    return jsonResponse({ ok: false, error: "Name is required" }, 400, origin);
+  }
+  if (typeof email !== "string" || !isValidEmail(email)) {
+    return jsonResponse({ ok: false, error: "A valid email is required" }, 400, origin);
+  }
+  if (typeof position !== "string" || !position.trim()) {
+    return jsonResponse({ ok: false, error: "Position is required" }, 400, origin);
+  }
+
+  const cvResult = validateFile(formData.get("cv"), "CV", true);
+  if (cvResult === null || "error" in cvResult) {
+    const error = cvResult === null ? "CV is required" : cvResult.error;
+    return jsonResponse({ ok: false, error }, 400, origin);
+  }
+  const coverLetterResult = validateFile(formData.get("coverLetter"), "Cover letter", false);
+  if (coverLetterResult !== null && "error" in coverLetterResult) {
+    return jsonResponse({ ok: false, error: coverLetterResult.error }, 400, origin);
+  }
+
+  const cv = cvResult;
+  const coverLetter = coverLetterResult;
+
+  let cvBase64: string;
+  let coverLetterBase64: string | null;
+  try {
+    [cvBase64, coverLetterBase64] = await Promise.all([
+      fileToBase64(cv),
+      coverLetter ? fileToBase64(coverLetter) : Promise.resolve(null),
+    ]);
+  } catch (err) {
+    console.error("Failed to encode uploaded files", err);
+    return jsonResponse({ ok: false, error: "Failed to process uploaded files" }, 400, origin);
+  }
+
+  const safeName = name.trim().slice(0, 200);
+  const safePosition = position.trim().slice(0, 200);
+
+  const attachments: ResendAttachment[] = [{ filename: cv.name || "cv", content: cvBase64 }];
+  if (coverLetter && coverLetterBase64) {
+    attachments.push({ filename: coverLetter.name || "cover-letter", content: coverLetterBase64 });
+  }
+
+  const teamEmail: ResendEmailPayload = {
+    from: FROM_ADDRESS,
+    to: TEAM_EMAIL,
+    reply_to: email,
+    subject: `New application: ${safePosition} — ${safeName}`,
+    text: `New job application received.\n\nPosition: ${safePosition}\nName: ${safeName}\nEmail: ${email}\n\nCV${coverLetter ? " and cover letter" : ""} attached.`,
+    attachments,
+  };
+
+  const confirmationEmail: ResendEmailPayload = {
+    from: FROM_ADDRESS,
+    to: email,
+    subject: `Your application for ${safePosition} — KairosGeist`,
+    text: `Hi ${safeName},\n\nThanks for applying to KairosGeist for the ${safePosition} role. We've received your CV${coverLetter ? " and cover letter" : ""} and will let you know the outcome either way, once we've had a chance to review it.\n\n— The KairosGeist team`,
+  };
+
+  const [teamResult, confirmResult] = await Promise.allSettled([
+    sendResendEmail(env.RESEND_API_KEY, teamEmail),
+    sendResendEmail(env.RESEND_API_KEY, confirmationEmail),
+  ]);
+
+  if (teamResult.status === "rejected") {
+    console.error("Failed to send application to team inbox", teamResult.reason);
+    return jsonResponse(
+      { ok: false, error: "Failed to send your application. Please try again or email us directly." },
+      502,
+      origin,
+    );
+  }
+
+  if (confirmResult.status === "rejected") {
+    console.error("Failed to send applicant confirmation email", confirmResult.reason);
+  }
+
+  return jsonResponse({ ok: true }, 200, origin);
+}
+
 export default {
   async fetch(request: Request, env: Env): Promise<Response> {
     const origin = request.headers.get("Origin");
@@ -112,102 +284,12 @@ export default {
     }
 
     const url = new URL(request.url);
-    if (url.pathname !== "/apply") {
-      return jsonResponse({ ok: false, error: "Not found" }, 404, origin);
+    if (url.pathname === "/apply") {
+      return handleApply(request, env, origin);
     }
-
-    if (request.method !== "POST") {
-      return jsonResponse({ ok: false, error: "Method not allowed" }, 405, origin);
+    if (url.pathname === "/feedback") {
+      return handleFeedback(request, env, origin);
     }
-
-    let formData: FormData;
-    try {
-      formData = await request.formData();
-    } catch {
-      return jsonResponse({ ok: false, error: "Invalid form submission" }, 400, origin);
-    }
-
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const position = formData.get("position");
-
-    if (typeof name !== "string" || !name.trim()) {
-      return jsonResponse({ ok: false, error: "Name is required" }, 400, origin);
-    }
-    if (typeof email !== "string" || !isValidEmail(email)) {
-      return jsonResponse({ ok: false, error: "A valid email is required" }, 400, origin);
-    }
-    if (typeof position !== "string" || !position.trim()) {
-      return jsonResponse({ ok: false, error: "Position is required" }, 400, origin);
-    }
-
-    const cvResult = validateFile(formData.get("cv"), "CV", true);
-    if (cvResult === null || "error" in cvResult) {
-      const error = cvResult === null ? "CV is required" : cvResult.error;
-      return jsonResponse({ ok: false, error }, 400, origin);
-    }
-    const coverLetterResult = validateFile(formData.get("coverLetter"), "Cover letter", false);
-    if (coverLetterResult !== null && "error" in coverLetterResult) {
-      return jsonResponse({ ok: false, error: coverLetterResult.error }, 400, origin);
-    }
-
-    const cv = cvResult;
-    const coverLetter = coverLetterResult;
-
-    let cvBase64: string;
-    let coverLetterBase64: string | null;
-    try {
-      [cvBase64, coverLetterBase64] = await Promise.all([
-        fileToBase64(cv),
-        coverLetter ? fileToBase64(coverLetter) : Promise.resolve(null),
-      ]);
-    } catch (err) {
-      console.error("Failed to encode uploaded files", err);
-      return jsonResponse({ ok: false, error: "Failed to process uploaded files" }, 400, origin);
-    }
-
-    const safeName = name.trim().slice(0, 200);
-    const safePosition = position.trim().slice(0, 200);
-
-    const attachments: ResendAttachment[] = [{ filename: cv.name || "cv", content: cvBase64 }];
-    if (coverLetter && coverLetterBase64) {
-      attachments.push({ filename: coverLetter.name || "cover-letter", content: coverLetterBase64 });
-    }
-
-    const teamEmail: ResendEmailPayload = {
-      from: FROM_ADDRESS,
-      to: TEAM_EMAIL,
-      reply_to: email,
-      subject: `New application: ${safePosition} — ${safeName}`,
-      text: `New job application received.\n\nPosition: ${safePosition}\nName: ${safeName}\nEmail: ${email}\n\nCV${coverLetter ? " and cover letter" : ""} attached.`,
-      attachments,
-    };
-
-    const confirmationEmail: ResendEmailPayload = {
-      from: FROM_ADDRESS,
-      to: email,
-      subject: `Your application for ${safePosition} — KairosGeist`,
-      text: `Hi ${safeName},\n\nThanks for applying to KairosGeist for the ${safePosition} role. We've received your CV${coverLetter ? " and cover letter" : ""} and will let you know the outcome either way, once we've had a chance to review it.\n\n— The KairosGeist team`,
-    };
-
-    const [teamResult, confirmResult] = await Promise.allSettled([
-      sendResendEmail(env.RESEND_API_KEY, teamEmail),
-      sendResendEmail(env.RESEND_API_KEY, confirmationEmail),
-    ]);
-
-    if (teamResult.status === "rejected") {
-      console.error("Failed to send application to team inbox", teamResult.reason);
-      return jsonResponse(
-        { ok: false, error: "Failed to send your application. Please try again or email us directly." },
-        502,
-        origin,
-      );
-    }
-
-    if (confirmResult.status === "rejected") {
-      console.error("Failed to send applicant confirmation email", confirmResult.reason);
-    }
-
-    return jsonResponse({ ok: true }, 200, origin);
+    return jsonResponse({ ok: false, error: "Not found" }, 404, origin);
   },
 } satisfies ExportedHandler<Env>;

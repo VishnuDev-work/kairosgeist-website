@@ -183,6 +183,9 @@
   .thanks-screen h2 { font-family: 'Inter Tight', sans-serif; font-size: 22px; margin: 0 0 10px; }
   .thanks-screen p { color: var(--muted); }
 
+  .submit-error { display: none; color: #b3261e; font-size: 13px; margin: 10px 0 0; }
+  .submit-error.active { display: block; }
+
   footer {
     position: fixed;
     left: 0;
@@ -317,6 +320,7 @@
     </div>
 
     <button type="submit" class="submit-btn">Submit</button>
+    <p class="submit-error">Something went wrong. Please try again.</p>
     <br/>
     <button type="button" class="back-link" data-back="owner">&larr; back</button>
   </form>
@@ -390,6 +394,7 @@
     </div>
 
     <button type="submit" class="submit-btn">Submit</button>
+    <p class="submit-error">Something went wrong. Please try again.</p>
     <br/>
     <button type="button" class="back-link" data-back="supervisor">&larr; back</button>
   </form>
@@ -431,6 +436,7 @@
     </div>
 
     <button type="submit" class="submit-btn">Submit</button>
+    <p class="submit-error">Something went wrong. Please try again.</p>
     <br/>
     <button type="button" class="back-link" data-back="worker">&larr; back</button>
   </form>
@@ -442,8 +448,6 @@
 
 </section>
 
-<iframe name="hidden_submit_frame" style="display:none;"></iframe>
-
 <footer>
   <p>&copy; <span id="copyright-year"></span> KairosGeist. All rights reserved.</p>
 </footer>
@@ -451,7 +455,7 @@
 
 <script>
   // ---- CONFIG: filled in from config.sh at build time (see README) ----
-  const FORM_CONFIG = __FEEDBACK_FORM_CONFIG_JSON__;
+  const WORKER_URL = '__WORKER_URL__';
   const SCALE_LABELS = ['Strongly Disagree', 'Disagree', 'Neutral', 'Agree', 'Strongly Agree'];
   const CLOSE_DELAY_MS = 4000;
   const HOME_URL = '/en/'; // fallback only, if the browser blocks window.close()
@@ -500,51 +504,52 @@
     });
   });
 
-  // Submit handling: build a hidden form targeting Google Forms' endpoint,
-  // POST via hidden iframe (avoids CORS issues with fetch), then show thanks
-  // and auto-redirect home.
+  // Submit handling: POST to our own Worker (not Google Forms directly) so
+  // we get a real success/failure response — a direct browser->Google Forms
+  // submission is cross-origin and opaque, so failures (ad blockers,
+  // network issues, etc.) used to be invisible and still showed "Thank
+  // you". The Worker forwards to Google server-side (where that response
+  // IS readable) and also keeps a backup copy.
   document.querySelectorAll('form.q-block').forEach((visibleForm) => {
     visibleForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const role = visibleForm.dataset.role;
-      const config = FORM_CONFIG[role];
-      if (!config || !config.action) {
-        alert('This survey isn\'t configured yet — see README.md ("Feedback page") for setup.');
-        return;
-      }
+      const submitBtn = visibleForm.querySelector('.submit-btn');
+      const errorMsg = visibleForm.querySelector('.submit-error');
       const data = new FormData(visibleForm);
+      const fields = {};
+      for (const [name, value] of data.entries()) fields[name] = value;
 
-      const hiddenForm = document.createElement('form');
-      hiddenForm.action = config.action;
-      hiddenForm.method = 'POST';
-      hiddenForm.target = 'hidden_submit_frame';
-      hiddenForm.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting…';
+      if (errorMsg) errorMsg.classList.remove('active');
 
-      for (const [name, value] of data.entries()) {
-        const entryId = config.entries[name];
-        if (!entryId) continue;
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = entryId;
-        input.value = value;
-        hiddenForm.appendChild(input);
-      }
+      fetch(`${WORKER_URL}/feedback`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ role, fields }),
+      })
+        .then((res) => res.json().then((body) => ({ httpOk: res.ok, body })))
+        .then(({ httpOk, body }) => {
+          if (!httpOk || !body.ok) throw new Error(body && body.error ? body.error : 'submit failed');
 
-      document.body.appendChild(hiddenForm);
-      hiddenForm.submit();
-      hiddenForm.remove();
+          document.querySelectorAll('.q-block').forEach((f) => f.classList.remove('active'));
+          document.getElementById('thanks-screen').classList.add('active');
 
-      document.querySelectorAll('.q-block').forEach((f) => f.classList.remove('active'));
-      document.getElementById('thanks-screen').classList.add('active');
-
-      setTimeout(() => {
-        window.close();
-        // Fallback: some browsers block script-closing a tab the script
-        // didn't itself open (varies by how the link was activated). If
-        // close() didn't work, the tab is still here 500ms later — send
-        // the visitor back to the homepage instead of leaving them stuck.
-        setTimeout(() => { window.location.href = HOME_URL; }, 500);
-      }, CLOSE_DELAY_MS);
+          setTimeout(() => {
+            window.close();
+            // Fallback: some browsers block script-closing a tab the script
+            // didn't itself open (varies by how the link was activated). If
+            // close() didn't work, the tab is still here 500ms later — send
+            // the visitor back to the homepage instead of leaving them stuck.
+            setTimeout(() => { window.location.href = HOME_URL; }, 500);
+          }, CLOSE_DELAY_MS);
+        })
+        .catch(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Submit';
+          if (errorMsg) errorMsg.classList.add('active');
+        });
     });
   });
 </script>

@@ -196,16 +196,31 @@ opens in a new tab, and closes itself a few seconds after submitting.
 **Why Google Forms as the backend:** free, zero setup, and responses land
 in a ready-to-analyze Sheet. The page itself is fully custom (your
 branding, your questions, auto-close on submit) — visitors never see the
-actual Google Form. It works by silently POSTing to the form's
-`formResponse` endpoint via a hidden iframe rather than a real `fetch()`
-call, because Google Forms doesn't send CORS headers the way Formspree
-does; a hidden-iframe POST sidesteps that restriction since the response
-is never read, only submitted.
+actual Google Form.
+
+**Submission goes through the Careers Worker (`_careers-worker/`), not
+straight to Google.** An earlier version posted directly from the browser
+to Google Forms' `formResponse` endpoint via a hidden iframe (to sidestep
+Google not sending CORS headers) — but that made the submission a pure
+fire-and-forget: the page showed "Thank you" unconditionally, with no way
+to detect an ad blocker, tracker-blocking extension, or network hiccup
+silently swallowing the request before it reached Google. Real responses
+went missing with zero indication anything had failed. Now the page POSTs
+JSON to `${WORKER_URL}/feedback`, the Worker forwards it to Google
+**server-side** (where the response is actually readable — CORS only
+restricts browsers, not server-to-server requests) and simultaneously
+emails a backup copy to the team inbox via Resend. The "Thank you" screen
+only shows if the Worker confirms at least one of those two channels
+succeeded; otherwise the page shows a real error and lets the visitor
+retry. This means **the Feedback page now requires the Careers Worker to
+be deployed**, even if you don't want the Careers/Apply pages themselves
+— see **Careers page** below for Worker setup, and set `WORKER_URL` in
+`config.sh` either way.
 
 **If you don't want this feature**, leave `FEEDBACK_FORM_CONFIG_JSON`
 unset in `config.sh` (or set it to `'{}'`, same as the example file) — the
 page still builds and the link still shows, but submitting shows a
-"not configured" message instead of silently failing. To remove it
+"survey not configured" error instead of silently failing. To remove it
 entirely: delete `feedback/` and `en/feedback/` plus their
 `templates/feedback/`, `templates/en/feedback/` counterparts, and remove
 the "pain-box" link (search for `/feedback/` under `templates/`).
@@ -253,10 +268,14 @@ the "pain-box" link (search for `/feedback/` under `templates/`).
    FEEDBACK_FORM_CONFIG_JSON='{"owner":{"action":"...","entries":{...}},"supervisor":{...},"worker":{...}}'
    ```
 
-6. Run `./scripts/build.sh`. Never paste real form IDs directly into
-   `templates/feedback/index.html` — they belong in `config.sh` only, same
-   as every other secret in this repo, so a fork doesn't inherit your live
-   forms.
+6. Run `./scripts/build.sh`, **then redeploy the Worker**
+   (`npx wrangler deploy` from `_careers-worker/`) — `FEEDBACK_FORM_CONFIG_JSON`
+   now gets baked into the Worker's source (`_careers-worker/src/index.ts`),
+   not just the page, so a build without a redeploy leaves the live Worker
+   on the old config. Never paste real form IDs directly into
+   `templates/feedback/index.html` or `templates/_careers-worker/src/index.ts`
+   — they belong in `config.sh` only, same as every other secret in this
+   repo, so a fork doesn't inherit your live forms.
 
 `/feedback/` carries a `noindex` meta tag on purpose — it's meant to be
 reached only via the direct link or a printed/QR code, never discovered
