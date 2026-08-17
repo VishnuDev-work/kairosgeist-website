@@ -206,15 +206,17 @@ fire-and-forget: the page showed "Thank you" unconditionally, with no way
 to detect an ad blocker, tracker-blocking extension, or network hiccup
 silently swallowing the request before it reached Google. Real responses
 went missing with zero indication anything had failed. Now the page POSTs
-JSON to `${WORKER_URL}/feedback`, the Worker forwards it to Google
+JSON to `${WORKER_URL}/feedback`, and the Worker forwards it to Google
 **server-side** (where the response is actually readable — CORS only
-restricts browsers, not server-to-server requests) and simultaneously
-emails a backup copy to the team inbox via Resend. The "Thank you" screen
-only shows if the Worker confirms at least one of those two channels
-succeeded; otherwise the page shows a real error and lets the visitor
-retry. This means **the Feedback page now requires the Careers Worker to
-be deployed**, even if you don't want the Careers/Apply pages themselves
-— see **Careers page** below for Worker setup, and set `WORKER_URL` in
+restricts browsers, not server-to-server requests). The "Thank you"
+screen only shows if the Worker confirms Google accepted it; otherwise
+the page shows a real error and the visitor just presses submit again.
+No backup email — deliberately, to avoid burning through Resend's
+send-volume tier for a survey — so the only copy of a response is
+whatever's in the Google Sheet. This means **the Feedback page now
+requires the Careers Worker to be deployed**, even if you don't want the
+Careers/Apply pages themselves — see **Careers page** below for Worker
+setup, and set `WORKER_URL` in
 `config.sh` either way.
 
 **If you don't want this feature**, leave `FEEDBACK_FORM_CONFIG_JSON`

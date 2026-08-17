@@ -109,7 +109,7 @@ function validateFile(
   return file;
 }
 
-async function handleFeedback(request: Request, env: Env, origin: string | null): Promise<Response> {
+async function handleFeedback(request: Request, origin: string | null): Promise<Response> {
   if (request.method !== "POST") {
     return jsonResponse({ ok: false, error: "Method not allowed" }, 405, origin);
   }
@@ -140,39 +140,22 @@ async function handleFeedback(request: Request, env: Env, origin: string | null)
     params.append(entryId, value);
   }
 
-  // Two independent delivery paths: forward to Google Forms server-side
-  // (unlike a browser posting directly to Google, this response IS
-  // readable, since CORS only restricts browsers) and a backup email to
-  // the team inbox. As long as either one lands, the response isn't lost —
-  // that's the whole point versus the old client-side hidden-iframe POST,
-  // which had no way to know if Google actually received anything.
-  const [googleResult, backupResult] = await Promise.allSettled([
-    fetch(config.action, {
+  // Forward to Google Forms server-side rather than from the browser —
+  // unlike a direct browser->Google POST, this response IS readable here
+  // (CORS only restricts browsers, not server-to-server requests), so we
+  // can actually tell the visitor whether it worked instead of assuming
+  // success unconditionally like the old client-side hidden-iframe POST
+  // did. No backup email — if this fails, the client shows an error and
+  // the visitor just resubmits.
+  try {
+    const r = await fetch(config.action, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: params.toString(),
-    }).then((r) => {
-      if (!r.ok) throw new Error(`Google Forms responded ${r.status}`);
-    }),
-    sendResendEmail(env.RESEND_API_KEY, {
-      from: FROM_ADDRESS,
-      to: TEAM_EMAIL,
-      subject: `Feedback survey response (${role})`,
-      text: `Anonymous feedback survey response.\n\nRole: ${role}\n\n${Object.entries(fields as Record<string, unknown>)
-        .map(([k, v]) => `${k}: ${v}`)
-        .join("\n")}`,
-    }),
-  ]);
-
-  if (googleResult.status === "rejected") {
-    console.error("Failed to forward feedback to Google Forms", googleResult.reason);
-  }
-  if (backupResult.status === "rejected") {
-    console.error("Failed to send feedback backup email", backupResult.reason);
-  }
-
-  const delivered = googleResult.status === "fulfilled" || backupResult.status === "fulfilled";
-  if (!delivered) {
+    });
+    if (!r.ok) throw new Error(`Google Forms responded ${r.status}`);
+  } catch (err) {
+    console.error("Failed to forward feedback to Google Forms", err);
     return jsonResponse({ ok: false, error: "Failed to record your response. Please try again." }, 502, origin);
   }
 
@@ -288,7 +271,7 @@ export default {
       return handleApply(request, env, origin);
     }
     if (url.pathname === "/feedback") {
-      return handleFeedback(request, env, origin);
+      return handleFeedback(request, origin);
     }
     return jsonResponse({ ok: false, error: "Not found" }, 404, origin);
   },
