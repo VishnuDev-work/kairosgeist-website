@@ -110,6 +110,14 @@
   .feature-icon { flex: 0 0 auto; color: var(--kg); }
   .feature-text p { margin: 8px 0 0 44px; font-size: 14px; color: var(--muted); }
 
+  .roadmap-layout { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
+  .roadmap-text { flex: 1 1 380px; min-width: 0; }
+  .roadmap-visual { flex: 1 1 320px; min-width: 0; max-width: 460px; position: sticky; top: 24px; }
+  .roadmap-visual img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  @media (max-width: 900px) {
+    .roadmap-visual { position: static; max-width: 100%; order: -1; }
+  }
+
   .roadmap-flag {
     display: inline-block;
     background: #fff3cd;
@@ -228,19 +236,31 @@
 </header>
 
 <section class="wrap" style="border-top:none; padding-top:10px;">
+<div class="roadmap-layout">
+<div class="roadmap-text">
+
   <h2><span class="roadmap-flag">Roadmap — not yet available</span></h2>
   <details class="feature-card">
-      <summary><h3>Daily housekeeping &amp; maintenance routing</h3></summary>
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M24 6 C15 6 8 13 8 22 C8 32 24 42 24 42 C24 42 40 32 40 22 C40 13 33 6 24 6 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="21" r="5" fill="none" stroke="currentColor" stroke-width="3"/></svg><h3>Daily housekeeping &amp; maintenance routing</h3></summary>
       <div class="feature-text"><p>Reading your building's floor plan and live occupancy to auto-route housekeeping and maintenance, minimizing travel and prioritizing VIP rooms. Still in design — shaped by the hotels we partner with early, not guessed at from outside.</p></div>
     </details>
   <details class="feature-card">
-      <summary><h3>Direct PMS &amp; payroll integration</h3></summary>
-      <div class="feature-text"><p>Automatic data pull from your property management system, and DATEV-compatible payroll export. Today, this data is entered manually while these integrations are being built.</p></div>
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M12 18 H34 M34 18 L28 12 M34 18 L28 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 30 H14 M14 30 L20 24 M14 30 L20 36" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Direct PMS &amp; payroll system integration</h3></summary>
+      <div class="feature-text"><p>Automatic data pull from your property management system, and a direct, automated push into DATEV or LODAS — no manual export/import step at all. Today, PMS data is entered manually, and payroll export is a downloadable report your accountant imports.</p></div>
     </details>
   <details class="feature-card">
-      <summary><h3>KairosUhr — QR clock-in for time recording</h3></summary>
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 14 V24 L31 29" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>KairosUhr — QR clock-in for time recording</h3></summary>
       <div class="feature-text"><p>Rotating, single-use QR codes at your entrance for legally compliant time recording — no facial recognition, no buddy punching. Works standalone for properties that just need time recording, or as part of the full platform. Still in design.</p></div>
     </details>
+  <details class="feature-card">
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M8 40 V8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M8 40 H42" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 32 V24 M22 32 V16 M30 32 V22 M38 32 V12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg><h3>KairosFinance — labor cost &amp; financial dashboard</h3></summary>
+      <div class="feature-text"><p>Labor cost by department, scheduled vs. actual hours, and labor cost as a percentage of revenue — built from data your account already has, no new integration required. A Pro tier adds full property-wide financial tracking and roll-up across multiple properties for owners with more than one. Still in design.</p></div>
+    </details>
+</div>
+<div class="roadmap-visual">
+  <img src="/assets/roadmap-visual.jpg" alt="Roadmap illustration — a winding path lit up ahead" />
+</div>
+</div>
 </section>
 
 <section class="wrap">

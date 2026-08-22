@@ -108,7 +108,15 @@
   }
   .feature-card[open] summary::after { transform: rotate(180deg); }
   .feature-icon { flex: 0 0 auto; color: var(--kg); }
-  .feature-text p { margin: 8px 0 0 0; font-size: 14px; color: var(--muted); }
+  .feature-text p { margin: 8px 0 0 44px; font-size: 14px; color: var(--muted); }
+
+  .roadmap-layout { display: flex; gap: 48px; align-items: flex-start; flex-wrap: wrap; }
+  .roadmap-text { flex: 1 1 380px; min-width: 0; }
+  .roadmap-visual { flex: 1 1 320px; min-width: 0; max-width: 460px; position: sticky; top: 24px; }
+  .roadmap-visual img { display: block; width: 100%; height: auto; border-radius: 8px; }
+  @media (max-width: 900px) {
+    .roadmap-visual { position: static; max-width: 100%; order: -1; }
+  }
 
   .roadmap-flag {
     display: inline-block;
@@ -228,19 +236,31 @@
 </header>
 
 <section class="wrap" style="border-top:none; padding-top:10px;">
+<div class="roadmap-layout">
+<div class="roadmap-text">
+
   <h2><span class="roadmap-flag">Roadmap — noch nicht verfügbar</span></h2>
   <details class="feature-card">
-      <summary><h3>Tägliches Housekeeping- &amp; Wartungsrouting</h3></summary>
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M24 6 C15 6 8 13 8 22 C8 32 24 42 24 42 C24 42 40 32 40 22 C40 13 33 6 24 6 Z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><circle cx="24" cy="21" r="5" fill="none" stroke="currentColor" stroke-width="3"/></svg><h3>Tägliches Housekeeping- &amp; Wartungsrouting</h3></summary>
       <div class="feature-text"><p>Nutzung des Grundrisses Ihres Gebäudes und der Live-Belegung, um Housekeeping und Wartung automatisch zu routen, Laufwege zu minimieren und VIP-Zimmer zu priorisieren. Noch in der Konzeptionsphase — gestaltet gemeinsam mit den Hotels, mit denen wir früh zusammenarbeiten, nicht von außen erraten.</p></div>
     </details>
   <details class="feature-card">
-      <summary><h3>Direkte PMS- &amp; Lohnabrechnungssystem-Integration</h3></summary>
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M12 18 H34 M34 18 L28 12 M34 18 L28 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/><path d="M36 30 H14 M14 30 L20 24 M14 30 L20 36" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>Direkte PMS- &amp; Lohnabrechnungssystem-Integration</h3></summary>
       <div class="feature-text"><p>Automatischer Datenabruf aus Ihrem Property-Management-System sowie eine direkte, automatisierte Übertragung an DATEV oder LODAS — ganz ohne manuellen Export/Import. Aktuell werden PMS-Daten manuell eingegeben, und der Lohnabrechnungs-Export ist ein herunterladbarer Bericht, den Ihre Steuerberatung importiert.</p></div>
     </details>
   <details class="feature-card">
-      <summary><h3>KairosUhr — QR-Zeiterfassung am Eingang</h3></summary>
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><circle cx="24" cy="24" r="18" fill="none" stroke="currentColor" stroke-width="3"/><path d="M24 14 V24 L31 29" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg><h3>KairosUhr — QR-Zeiterfassung am Eingang</h3></summary>
       <div class="feature-text"><p>Rotierende, einmalig gültige QR-Codes am Eingang für eine rechtskonforme Zeiterfassung — ohne Gesichtserkennung, ohne Missbrauch durch Kolleg:innen. Eigenständig einsetzbar für Betriebe, die nur Zeiterfassung brauchen, oder als Teil der vollständigen Plattform. Noch in der Konzeptionsphase.</p></div>
     </details>
+  <details class="feature-card">
+      <summary><svg class="feature-icon" width="28" height="28" viewBox="0 0 48 48"><path d="M8 40 V8" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M8 40 H42" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M14 32 V24 M22 32 V16 M30 32 V22 M38 32 V12" stroke="currentColor" stroke-width="4" stroke-linecap="round"/></svg><h3>KairosFinance — Personalkosten- und Finanz-Dashboard</h3></summary>
+      <div class="feature-text"><p>Personalkosten nach Abteilung, geplante vs. tatsächliche Stunden, und Personalkosten als Anteil am Umsatz — auf Basis von Daten, die bereits vorhanden sind, ohne neue Integration. Eine Pro-Version ergänzt vollständiges Finanz-Tracking für den gesamten Betrieb sowie eine Zusammenführung über mehrere Standorte für Eigentümer mit mehr als einer Immobilie. Noch in der Konzeptionsphase.</p></div>
+    </details>
+</div>
+<div class="roadmap-visual">
+  <img src="/assets/roadmap-visual.jpg" alt="Roadmap-Illustration — ein beleuchteter, geschwungener Weg" />
+</div>
+</div>
 </section>
 
 <section class="wrap">
